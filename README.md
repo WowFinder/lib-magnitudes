@@ -3,6 +3,23 @@ TypeScript library for unit-aware handling and arithmetics of arbitrary magnitud
 
 This project / repo starts as a way to consolidate duplicate code from [WowFinder's Model repository](https://github.com/WowFinder/model/tree/main/src/Scalar) and the [Battery Capacity Converter project](https://github.com/edurne85/battery-capacity-converter).
 
+## Current checks and metrics
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=WowFinder_lib-magnitudes&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=WowFinder_lib-magnitudes)
+
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=WowFinder_lib-magnitudes&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=WowFinder_lib-magnitudes)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=WowFinder_lib-magnitudes&metric=coverage)](https://sonarcloud.io/summary/new_code?id=WowFinder_lib-magnitudes)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=WowFinder_lib-magnitudes&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=WowFinder_lib-magnitudes)
+
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=WowFinder_lib-magnitudes&metric=bugs)](https://sonarcloud.io/summary/new_code?id=WowFinder_lib-magnitudes)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=WowFinder_lib-magnitudes&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=WowFinder_lib-magnitudes)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=WowFinder_lib-magnitudes&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=WowFinder_lib-magnitudes)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=WowFinder_lib-magnitudes&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=WowFinder_lib-magnitudes)
+
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=WowFinder_lib-magnitudes&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=WowFinder_lib-magnitudes)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=WowFinder_lib-magnitudes&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=WowFinder_lib-magnitudes)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=WowFinder_lib-magnitudes&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=WowFinder_lib-magnitudes)
+
 ## Roadmap
 
 The first goal is to absorb all the relevant functionality from the above projects, and to present an extensible and agnostic interface.
