@@ -21,7 +21,9 @@ jobs:
               with:
                   node-version: 22
             - name: Install dependencies
-              run: yarn
+              run: |
+                  corepack enable
+                  yarn
             - name: Lint validation
               run: yarn lint
             - name: Module compilation and build
