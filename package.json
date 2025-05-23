@@ -1,12 +1,12 @@
 {
-    "name": "@edurne85/lib-magnitudes",
+    "name": "@wowfinder/lib-magnitudes",
     "version": "0.0.1",
     "description": "TypeScript library for unit-aware handling and arithmetics of arbitrary magnitudes",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "repository": {
         "type": "git",
-        "url": "https://github.com/edurne85/lib-magnitudes.git"
+        "url": "https://github.com/WowFinder/lib-magnitudes.git"
     },
     "author": "Edurne Pascual <herenvardo@gmail.com>",
     "license": "GPL-3.0-or-later",
