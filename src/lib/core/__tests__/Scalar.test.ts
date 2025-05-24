@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import {
     SampleTimeImpl,
     SampleTimeUnits,
-    miliPrefix,
+    milliPrefix,
     sampleTimeUnitParser,
 } from './SampleTime.mocks';
 
@@ -22,7 +22,7 @@ describe('Scalar', () => {
         const scalar = new SampleTimeImpl({ value: 0.1, unit: 's' });
         expect(scalar.toRawString()).toBe('0.1 s');
         expect(scalar.toPrefixedString(1)).toBe('100.0 ms');
-        expect(scalar.toPrefixedString(0, miliPrefix)).toBe('100 ms');
+        expect(scalar.toPrefixedString(0, milliPrefix)).toBe('100 ms');
         expect(scalar.toString()).toBe('100.000 ms');
     });
     describe('parsing', () => {

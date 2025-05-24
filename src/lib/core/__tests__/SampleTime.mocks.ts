@@ -21,10 +21,10 @@ const sampleTimeConversionFactors: {
     m: 60,
 };
 
-const miliPrefix: PrefixSpec = {
+const milliPrefix: PrefixSpec = {
     symbol: 'm',
     exp: -3,
-    siName: 'mili',
+    siName: 'milli',
     auxiliar: false,
 };
 
@@ -49,6 +49,6 @@ export {
     sampleTimeUnitParser,
     type SampleTimeBuilder,
     sampleTimeConversionFactors,
-    miliPrefix,
+    milliPrefix,
     SampleTimeImpl,
 };
