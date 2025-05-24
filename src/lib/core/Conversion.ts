@@ -4,10 +4,11 @@ import { type KeyAsValueObject } from './helpers';
 type Conversion<
     T extends KeyAsValueObject<keyof T & string>,
     R extends Scalar<T> = Scalar<T>,
-    > = (magnitude: BaseScalar<T>, to: keyof T) => R;
+> = (magnitude: BaseScalar<T>, to: keyof T) => R;
 
-type ConversionFactors<T extends KeyAsValueObject<keyof T & string>> =
-    Readonly<Record<keyof T, number>>;
+type ConversionFactors<T extends KeyAsValueObject<keyof T & string>> = Readonly<
+    Record<keyof T, number>
+>;
 
 function makeConversions<
     T extends KeyAsValueObject<keyof T & string>,
