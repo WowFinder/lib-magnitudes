@@ -41,15 +41,15 @@ describe('Length', () => {
         });
 
         const distanceInAu = andromedaDistance.convert(LengthUnit.au);
-        expect(distanceInAu.value).toBeCloseTo(1.6044261e11, -8);
+        expect(distanceInAu.value).toBeCloseTo(160442095784.45557, 3);
         expect(distanceInAu.unit).toBe('au');
 
         const distanceInPc = andromedaDistance.convert(LengthUnit.pc);
-        expect(distanceInPc.value).toBeCloseTo(777840, -3);
+        expect(distanceInPc.value).toBeCloseTo(777839.579, 3);
         expect(distanceInPc.unit).toBe('pc');
 
         const distanceInMeters = andromedaDistance.convert(LengthUnit.m);
-        expect(distanceInMeters.value).toBeCloseTo(2.4e22, -19);
+        expect(distanceInMeters.value).toBeCloseTo(2.40017959e22, 0);
         expect(distanceInMeters.unit).toBe('m');
         expect(distanceInMeters.toString()).toBe('24.002 Zm');
     });

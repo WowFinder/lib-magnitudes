@@ -19,7 +19,7 @@ const LengthUnit = {
     pc: 'pc', // Parsec
     // Microscopic units
     Å: 'Å', // Angstrom (10^-10 m)
-    lp: 'lp', // Plank length (1.616255e-35 m)
+    lp: 'lp', // Planck length (1.616255e-35 m)
 } as const;
 Object.freeze(LengthUnit);
 
