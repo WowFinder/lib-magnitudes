@@ -25,8 +25,7 @@ class Voltage extends Scalar<typeof VoltageUnit> {
     static {
         Voltage.#converter = makeConversions<typeof VoltageUnit, Voltage>(
             voltageConversionFactors,
-            ({ value, unit }) =>
-                new Voltage({ value, unit: unit as keyof typeof VoltageUnit }),
+            ({ value, unit }) => new Voltage({ value, unit }),
         );
     }
 

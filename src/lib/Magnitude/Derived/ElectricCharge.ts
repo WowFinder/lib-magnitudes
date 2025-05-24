@@ -34,15 +34,11 @@ class ElectricCharge extends Scalar<typeof ElectricChargeUnit> {
             typeof ElectricChargeUnit,
             ElectricCharge
         >(
-            {
-                C: 1,
-                As: 1,
-                Ah: 3600,
-            },
+            electricChargeConversionFactors,
             ({ value, unit }) =>
                 new ElectricCharge({
                     value,
-                    unit: unit as keyof typeof ElectricChargeUnit,
+                    unit,
                 }),
         );
     }

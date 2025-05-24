@@ -25,8 +25,7 @@ class Power extends Scalar<typeof PowerUnit> {
     static {
         Power.#converter = makeConversions<typeof PowerUnit, Power>(
             powerConversionFactors,
-            ({ value, unit }) =>
-                new Power({ value, unit: unit as keyof typeof PowerUnit }),
+            ({ value, unit }) => new Power({ value, unit }),
         );
     }
 
