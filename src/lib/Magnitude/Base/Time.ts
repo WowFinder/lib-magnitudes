@@ -1,5 +1,6 @@
 import {
     type Conversion,
+    type ConversionFactors,
     makeConversions,
     Scalar,
     type ScalarBuilder,
@@ -13,12 +14,13 @@ const TimeUnit = {
 } as const;
 Object.freeze(TimeUnit);
 
-const timeConversionFactors: Record<keyof typeof TimeUnit, number> = {
+const timeConversionFactors: ConversionFactors<typeof TimeUnit> = {
     s: 1,
     m: 60,
     h: 3600,
     d: 86400,
-};
+} as const;
+Object.freeze(timeConversionFactors);
 
 class Time extends Scalar<typeof TimeUnit> {
     static #converter: Conversion<typeof TimeUnit, Time>;

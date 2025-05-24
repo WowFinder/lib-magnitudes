@@ -1,5 +1,6 @@
 import {
     type Conversion,
+    type ConversionFactors,
     makeConversions,
     Scalar,
     type ScalarBuilder,
@@ -23,7 +24,7 @@ const LengthUnit = {
 } as const;
 Object.freeze(LengthUnit);
 
-const lengthConversionFactors: Record<keyof typeof LengthUnit, number> = {
+const lengthConversionFactors: ConversionFactors<typeof LengthUnit> = {
     m: 1,
     ft: 0.3048,
     in: 0.0254,
@@ -34,7 +35,8 @@ const lengthConversionFactors: Record<keyof typeof LengthUnit, number> = {
     pc: 3.0857e16,
     Å: 1e-10,
     lp: 1.616255e-35,
-};
+} as const;
+Object.freeze(lengthConversionFactors);
 
 class Length extends Scalar<typeof LengthUnit> {
     static #converter: Conversion<typeof LengthUnit, Length>;
