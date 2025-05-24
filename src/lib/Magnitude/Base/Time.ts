@@ -29,8 +29,7 @@ class Time extends Scalar<typeof TimeUnit> {
     static {
         Time.#converter = makeConversions<typeof TimeUnit, Time>(
             timeConversionFactors,
-            ({ value, unit }) =>
-                new Time({ value, unit: unit as keyof typeof TimeUnit }),
+            ({ value, unit }) => new Time({ value, unit }),
         );
     }
 
