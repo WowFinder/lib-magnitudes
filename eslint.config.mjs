@@ -116,7 +116,6 @@ export default [
             complexity: ['error', 15],
             '@typescript-eslint/no-non-null-assertion': 'off',
             // https://iliubinskii.github.io/eslint-plugin-misc/#rules
-            'misc/class-match-filename': 'warn',
             'misc/no-shadow': 'warn',
             'misc/typescript/no-unsafe-object-assignment': 'error',
         },
