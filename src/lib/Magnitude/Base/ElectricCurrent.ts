@@ -29,9 +29,7 @@ class ElectricCurrent extends Scalar<typeof ElectricCurrentUnit> {
             typeof ElectricCurrentUnit,
             ElectricCurrent
         >(
-            {
-                A: 1,
-            },
+            electricCurrentConversionFactors,
             ({ value, unit }) =>
                 new ElectricCurrent({
                     value,
