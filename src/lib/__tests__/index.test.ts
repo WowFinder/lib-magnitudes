@@ -9,6 +9,7 @@ describe('lib index', () => {
             'fillDimensionality',
             'prefixMatchers',
             'makeConversions',
+            'Time',
         ]);
     });
 });
