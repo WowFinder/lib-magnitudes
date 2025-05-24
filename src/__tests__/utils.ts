@@ -11,4 +11,15 @@ function expectExportsExactly(
     });
 }
 
-export { expectExportsExactly };
+function expectExportsAtLeast(
+    module: Record<string, unknown>,
+    expectedExports: string[],
+): void {
+    const keys = Object.keys(module);
+    expect(keys.length).toBeGreaterThanOrEqual(expectedExports.length);
+    expectedExports.forEach(key => {
+        expect(module[key]).toBeDefined();
+    });
+}
+
+export { expectExportsExactly, expectExportsAtLeast };
