@@ -1,45 +1,10 @@
-import { Scalar } from '../Scalar';
-import { type PrefixSpec } from '../../Units/Prefix';
-import { unitParser } from '../helpers';
 import { describe, it, expect } from 'vitest';
-
-const SampleTimeUnits = {
-    s: 's',
-    m: 'm',
-} as const;
-
-const sampleTimeUnitParser = unitParser(SampleTimeUnits);
-
-type SampleTimeBuilder = {
-    value: number;
-    unit: keyof typeof SampleTimeUnits;
-};
-
-const conversionFactors: { [key in keyof typeof SampleTimeUnits]: number } = {
-    s: 1,
-    m: 60,
-};
-
-const miliPrefix: PrefixSpec = {
-    symbol: 'm',
-    exp: -3,
-    siName: 'mili',
-    auxiliar: false,
-};
-
-class SampleTimeImpl extends Scalar<typeof SampleTimeUnits> {
-    constructor(builder: SampleTimeBuilder) {
-        super(builder);
-    }
-
-    convert(to: keyof typeof SampleTimeUnits): SampleTimeImpl {
-        const factor = conversionFactors[to] / conversionFactors[this.unit];
-        return new SampleTimeImpl({
-            value: this.value * factor,
-            unit: to,
-        });
-    }
-}
+import {
+    SampleTimeImpl,
+    SampleTimeUnits,
+    miliPrefix,
+    sampleTimeUnitParser,
+} from './SampleTime.mocks';
 
 describe('Scalar', () => {
     it('should create a scalar from a builder', () => {

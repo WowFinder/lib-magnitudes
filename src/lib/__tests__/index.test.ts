@@ -16,6 +16,8 @@ describe('lib index', () => {
             'prefixBySymbol',
             'bestPrefixByValue',
             'defineUnit',
+            'makeConversions',
+            'add',
         ]);
     });
 });

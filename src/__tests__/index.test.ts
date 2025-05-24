@@ -16,6 +16,8 @@ describe('main index', () => {
             'prefixBySymbol',
             'bestPrefixByValue',
             'defineUnit',
+            'makeConversions',
+            'add',
         ]);
     });
 });
