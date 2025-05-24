@@ -7,14 +7,12 @@ import {
 import { type KeyAsValueObject, type Parser } from './helpers';
 
 const prefixedScalarMatcher = new RegExp(
-    `^([+-]?[0-9]+(?:\\.[0-9]*)?(?:[eE][+-]?[0-9]+)?)\\s*${prefixMatchers.capturingOptional}(\\p{L}*)$`,
+    `^([+-]?\\d+(?:\\.\\d*)?(?:[eE][+-]?\\d+)?)\\s*${prefixMatchers.capturingOptional}(\\p{L}*)$`,
     'u',
 );
 
-const unprefixedScalarMatcher = new RegExp(
-    '^([+-]?[0-9]+(?:\\.[0-9]*)?(?:[eE][+-]?[0-9]+)?)\\s*(\\p{L}*)$',
-    'u',
-);
+const unprefixedScalarMatcher =
+    /^([+-]?\d+(?:\.\d*)?(?:[eE][+-]?\d+)?)\s*(\p{L}*)$/u;
 
 const defaultPrecision = 3;
 
@@ -24,8 +22,8 @@ interface ScalarBuilder<T extends KeyAsValueObject<keyof T & string>> {
 }
 
 class BaseScalar<T extends KeyAsValueObject<keyof T & string>> {
-    #value: number;
-    #unit: keyof T;
+    readonly #value: number;
+    readonly #unit: keyof T;
     constructor({ value, unit }: ScalarBuilder<T>) {
         this.#value = value;
         this.#unit = unit;
@@ -57,8 +55,8 @@ class BaseScalar<T extends KeyAsValueObject<keyof T & string>> {
         input: string,
         unitParser: Parser<keyof T>,
     ): BaseScalar<T> {
-        const prefixedMatch = input.match(prefixedScalarMatcher);
-        const unprefixedMatch = input.match(unprefixedScalarMatcher);
+        const prefixedMatch = prefixedScalarMatcher.exec(input);
+        const unprefixedMatch = unprefixedScalarMatcher.exec(input);
 
         let err = undefined as Error | undefined;
 
