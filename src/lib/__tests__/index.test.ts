@@ -1,10 +1,12 @@
-import * as Units from '../';
+import * as lib from '../';
 import { describe, it } from 'vitest';
-import { expectExportsExactly } from '../../../__tests__/utils';
+import { expectExportsExactly } from '../../__tests__/utils';
 
-describe('Units index', () => {
+describe('lib index', () => {
     it('should export all expected members', () => {
-        expectExportsExactly(Units, [
+        expectExportsExactly(lib, [
+            'Scalar',
+            'BaseScalar',
             'fillDimensionality',
             'matchDimensionalities',
             'matchPartialDimensionalities',

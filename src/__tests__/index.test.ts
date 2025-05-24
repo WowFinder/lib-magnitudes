@@ -1,8 +1,21 @@
-import { testable } from '../index';
-import { describe, it, expect } from 'vitest';
+import * as main from '../';
+import { describe, it } from 'vitest';
+import { expectExportsExactly } from './utils';
 
-describe('testable function', () => {
-    it('should return "testable"', () => {
-        expect(testable()).toBe('testable');
+describe('main index', () => {
+    it('should export all expected members', () => {
+        expectExportsExactly(main, [
+            'Scalar',
+            'BaseScalar',
+            'fillDimensionality',
+            'matchDimensionalities',
+            'matchPartialDimensionalities',
+            'UnitPrefixes',
+            'prefixMatchers',
+            'prefixSymbols',
+            'prefixBySymbol',
+            'bestPrefixByValue',
+            'defineUnit',
+        ]);
     });
 });
