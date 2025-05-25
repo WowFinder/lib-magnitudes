@@ -3,7 +3,7 @@ import {
     UnitPrefixes,
     bestPrefixByValue,
     prefixMatchers,
-} from '../Units/Prefix';
+} from './Prefix';
 import { type KeyAsValueObject, type Parser } from './helpers';
 
 const prefixedScalarMatcher = new RegExp(

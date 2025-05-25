@@ -1,4 +1,4 @@
-import { fillDimensionality } from '../../../Units';
+import { fillDimensionality } from '../../../core';
 import { MassUnit, Mass } from '../Mass';
 import { describe, expect, it } from 'vitest';
 

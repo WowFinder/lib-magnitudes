@@ -4,8 +4,9 @@ import {
     makeConversions,
     Scalar,
     type ScalarBuilder,
+    type Dimensionality,
+    dimensionalityRatio,
 } from '../../core';
-import { type Dimensionality, dimensionalityRatio } from '../../Units';
 import { ElectricCharge } from './ElectricCharge';
 import { Energy } from './Energy';
 

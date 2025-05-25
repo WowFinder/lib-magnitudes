@@ -4,8 +4,9 @@ import {
     makeConversions,
     Scalar,
     type ScalarBuilder,
+    type Dimensionality,
+    fillDimensionality,
 } from '../../core';
-import { type Dimensionality, fillDimensionality } from '../../Units';
 
 /* Note: while the SI base unit for mass is the kilogram (kg),
     the code uses the gram (g) as the basis for calculations.

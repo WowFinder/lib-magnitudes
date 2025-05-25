@@ -4,9 +4,10 @@ import {
     makeConversions,
     Scalar,
     type ScalarBuilder,
+    type Dimensionality,
+    productDimensionality,
 } from '../../core';
 import { ElectricCurrent, Time, timeConversionFactors } from '../Base';
-import { type Dimensionality, productDimensionality } from '../../Units';
 
 const ElectricChargeUnit = {
     C: 'C',

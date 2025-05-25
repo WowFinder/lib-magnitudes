@@ -1,4 +1,4 @@
-import { type PrefixSpec } from '../../Units';
+import { type PrefixSpec } from '../../core';
 import { unitParser } from '../helpers';
 import { Scalar } from '../Scalar';
 
