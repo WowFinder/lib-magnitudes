@@ -16,13 +16,13 @@ const TimeUnit = {
 } as const;
 Object.freeze(TimeUnit);
 
-const timeConversionFactors: ConversionFactors<typeof TimeUnit> = {
+const timeUnitConversionFactors: ConversionFactors<typeof TimeUnit> = {
     s: 1,
     m: 60,
     h: 3600,
     d: 86400,
 } as const;
-Object.freeze(timeConversionFactors);
+Object.freeze(timeUnitConversionFactors);
 
 class Time extends Scalar<typeof TimeUnit> {
     static #converter: ScalarConversion<typeof TimeUnit, Time>;
@@ -32,7 +32,7 @@ class Time extends Scalar<typeof TimeUnit> {
 
     static {
         Time.#converter = makeScalarConversions<typeof TimeUnit, Time>(
-            timeConversionFactors,
+            timeUnitConversionFactors,
             ({ value, unit }) => new Time({ value, unit }),
         );
     }
@@ -47,4 +47,4 @@ class Time extends Scalar<typeof TimeUnit> {
     }
 }
 
-export { TimeUnit, timeConversionFactors, Time };
+export { TimeUnit, timeUnitConversionFactors, Time };

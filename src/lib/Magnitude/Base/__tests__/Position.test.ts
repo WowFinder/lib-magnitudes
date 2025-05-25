@@ -50,4 +50,15 @@ describe('Position', () => {
         expect(positionInMiles.z).toBeCloseTo(0.00186411, 6);
         expect(positionInMiles.unit).toBe(LengthUnit.mile);
     });
+    it('should compute the magnitude of the vector correctly', () => {
+        const position = new Position({
+            x: 3,
+            y: 4,
+            z: 0,
+            unit: LengthUnit.m,
+        });
+        const magnitude = position.magnitude;
+        expect(magnitude.value).toBeCloseTo(5, 5);
+        expect(magnitude.unit).toBe(LengthUnit.m);
+    });
 });
