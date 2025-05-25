@@ -1,7 +1,7 @@
 import {
-    type Conversion,
+    type ScalarConversion,
     type ConversionFactors,
-    makeConversions,
+    makeScalarConversions,
     Scalar,
     type ScalarBuilder,
     type Dimensionality,
@@ -25,13 +25,13 @@ const timeConversionFactors: ConversionFactors<typeof TimeUnit> = {
 Object.freeze(timeConversionFactors);
 
 class Time extends Scalar<typeof TimeUnit> {
-    static #converter: Conversion<typeof TimeUnit, Time>;
+    static #converter: ScalarConversion<typeof TimeUnit, Time>;
     constructor({ value, unit }: ScalarBuilder<typeof TimeUnit>) {
         super({ value, unit });
     }
 
     static {
-        Time.#converter = makeConversions<typeof TimeUnit, Time>(
+        Time.#converter = makeScalarConversions<typeof TimeUnit, Time>(
             timeConversionFactors,
             ({ value, unit }) => new Time({ value, unit }),
         );

@@ -1,7 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
 import {
-    SampleLengthImpl,
     SamplePositionImpl,
     SamplePositionUnits,
 } from './SamplePosition.mocks';
@@ -37,9 +36,7 @@ describe('Vector3D', () => {
 
     it('should calculate magnitude correctly', () => {
         const vector = new SamplePositionImpl({ x: 3, y: 4, z: 0 });
-        const magnitude = vector.magnitude(
-            builder => new SampleLengthImpl(builder),
-        );
+        const magnitude = vector.magnitude;
         expect(magnitude).toBeDefined();
         expect(magnitude.value).toBeCloseTo(5);
         expect(magnitude.unit).toBe(SamplePositionUnits.m);

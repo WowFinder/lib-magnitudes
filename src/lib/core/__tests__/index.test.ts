@@ -6,7 +6,8 @@ describe('core', () => {
     it('should export all expected members', () => {
         expectExportsExactly(core, [
             // from Conversion.ts
-            'makeConversions',
+            'makeScalarConversions',
+            'makeVectorConversions',
             'add',
 
             // from Dimensionality.ts
@@ -25,11 +26,15 @@ describe('core', () => {
             'bestPrefixByValue',
 
             // From Scalar.ts
-            'Scalar',
             'BaseScalar',
+            'Scalar',
 
             // From Unit.ts
             'defineUnit',
+
+            // From Vector3D.ts
+            'BaseVector3D',
+            'Vector3D',
         ]);
     });
 });

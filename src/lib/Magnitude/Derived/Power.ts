@@ -1,7 +1,7 @@
 import {
-    type Conversion,
+    type ScalarConversion,
     type ConversionFactors,
-    makeConversions,
+    makeScalarConversions,
     Scalar,
     type ScalarBuilder,
     type Dimensionality,
@@ -21,13 +21,13 @@ const powerConversionFactors: ConversionFactors<typeof PowerUnit> = {
 Object.freeze(powerConversionFactors);
 
 class Power extends Scalar<typeof PowerUnit> {
-    static #converter: Conversion<typeof PowerUnit, Power>;
+    static #converter: ScalarConversion<typeof PowerUnit, Power>;
     constructor({ value, unit }: ScalarBuilder<typeof PowerUnit>) {
         super({ value, unit });
     }
 
     static {
-        Power.#converter = makeConversions<typeof PowerUnit, Power>(
+        Power.#converter = makeScalarConversions<typeof PowerUnit, Power>(
             powerConversionFactors,
             ({ value, unit }) => new Power({ value, unit }),
         );

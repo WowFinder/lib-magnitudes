@@ -1,24 +1,30 @@
 import { BaseScalar, type Scalar, type ScalarBuilder } from './Scalar';
-import { type KeyAsValueObject } from './helpers';
+import { type Vector3DBuilder, type Vector3D } from './Vector3D';
+import { type StrictEnum } from './helpers';
 
-type Conversion<
-    T extends KeyAsValueObject<keyof T & string>,
+type ScalarConversion<
+    T extends StrictEnum<T>,
     R extends Scalar<T> = Scalar<T>,
 > = (magnitude: BaseScalar<T>, to: keyof T) => R;
 
-type ConversionFactors<T extends KeyAsValueObject<keyof T & string>> = Readonly<
+type VectorConversion<
+    T extends StrictEnum<T>,
+    R extends Vector3D<T> = Vector3D<T>,
+> = (vector: Vector3D<T>, to: keyof T) => R;
+
+type ConversionFactors<T extends StrictEnum<T>> = Readonly<
     Record<keyof T, number>
 >;
 
-function makeConversions<
-    T extends KeyAsValueObject<keyof T & string>,
+function makeScalarConversions<
+    T extends StrictEnum<T>,
     R extends Scalar<T> = Scalar<T>,
 >(
     factors: {
         [keys in keyof T]: number;
     },
     constructor: ({ value, unit }: ScalarBuilder<T>) => R,
-): Conversion<T, R> {
+): ScalarConversion<T, R> {
     return (magnitude: BaseScalar<T>, to: keyof T): R => {
         return constructor({
             value: (magnitude.value * factors[magnitude.unit]) / factors[to],
@@ -27,11 +33,25 @@ function makeConversions<
     };
 }
 
-function add<
-    T extends KeyAsValueObject<keyof T & string>,
-    R extends Scalar<T> = Scalar<T>,
+function makeVectorConversions<
+    T extends StrictEnum<T>,
+    R extends Vector3D<T> = Vector3D<T>,
 >(
-    conversion: Conversion<T, R>,
+    factors: ConversionFactors<T>,
+    constructor: (builder: Vector3DBuilder<T>) => R,
+): VectorConversion<T, R> {
+    return (vector: Vector3D<T>, to: keyof T): R => {
+        const factor = factors[vector.unit] / factors[to];
+        const x = vector.x * factor;
+        const y = vector.y * factor;
+        const z = vector.z * factor;
+        return constructor({ x, y, z, unit: to });
+    };
+}
+
+// TODO: Refactor as static method on Scalar
+function add<T extends StrictEnum<T>, R extends Scalar<T> = Scalar<T>>(
+    conversion: ScalarConversion<T, R>,
     unit: keyof T,
     ...magnitudes: BaseScalar<T>[]
 ): R {
@@ -42,4 +62,11 @@ function add<
     return conversion(new BaseScalar({ value, unit }), unit);
 }
 
-export { type Conversion, type ConversionFactors, makeConversions, add };
+export {
+    type ScalarConversion,
+    type VectorConversion,
+    type ConversionFactors,
+    makeScalarConversions,
+    makeVectorConversions,
+    add,
+};

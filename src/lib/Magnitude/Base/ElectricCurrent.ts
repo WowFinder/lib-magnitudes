@@ -1,7 +1,7 @@
 import {
-    type Conversion,
+    type ScalarConversion,
     type ConversionFactors,
-    makeConversions,
+    makeScalarConversions,
     Scalar,
     type ScalarBuilder,
     type Dimensionality,
@@ -21,13 +21,16 @@ const electricCurrentConversionFactors: ConversionFactors<
 Object.freeze(electricCurrentConversionFactors);
 
 class ElectricCurrent extends Scalar<typeof ElectricCurrentUnit> {
-    static #converter: Conversion<typeof ElectricCurrentUnit, ElectricCurrent>;
+    static #converter: ScalarConversion<
+        typeof ElectricCurrentUnit,
+        ElectricCurrent
+    >;
     constructor({ value, unit }: ScalarBuilder<typeof ElectricCurrentUnit>) {
         super({ value, unit });
     }
 
     static {
-        ElectricCurrent.#converter = makeConversions<
+        ElectricCurrent.#converter = makeScalarConversions<
             typeof ElectricCurrentUnit,
             ElectricCurrent
         >(

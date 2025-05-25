@@ -1,7 +1,7 @@
 import {
-    type Conversion,
+    type ScalarConversion,
     type ConversionFactors,
-    makeConversions,
+    makeScalarConversions,
     Scalar,
     type ScalarBuilder,
     type Dimensionality,
@@ -31,13 +31,13 @@ const massConversionFactors: ConversionFactors<typeof MassUnit> = {
 Object.freeze(massConversionFactors);
 
 class Mass extends Scalar<typeof MassUnit> {
-    static #converter: Conversion<typeof MassUnit, Mass>;
+    static #converter: ScalarConversion<typeof MassUnit, Mass>;
     constructor({ value, unit }: ScalarBuilder<typeof MassUnit>) {
         super({ value, unit });
     }
 
     static {
-        Mass.#converter = makeConversions<typeof MassUnit, Mass>(
+        Mass.#converter = makeScalarConversions<typeof MassUnit, Mass>(
             massConversionFactors,
             ({ value, unit }) => new Mass({ value, unit }),
         );

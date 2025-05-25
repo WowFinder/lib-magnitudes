@@ -1,7 +1,7 @@
 import {
-    type Conversion,
+    type ScalarConversion,
     type ConversionFactors,
-    makeConversions,
+    makeScalarConversions,
     Scalar,
     type ScalarBuilder,
     type Dimensionality,
@@ -21,13 +21,13 @@ const voltageConversionFactors: ConversionFactors<typeof VoltageUnit> = {
 Object.freeze(voltageConversionFactors);
 
 class Voltage extends Scalar<typeof VoltageUnit> {
-    static #converter: Conversion<typeof VoltageUnit, Voltage>;
+    static #converter: ScalarConversion<typeof VoltageUnit, Voltage>;
     constructor({ value, unit }: ScalarBuilder<typeof VoltageUnit>) {
         super({ value, unit });
     }
 
     static {
-        Voltage.#converter = makeConversions<typeof VoltageUnit, Voltage>(
+        Voltage.#converter = makeScalarConversions<typeof VoltageUnit, Voltage>(
             voltageConversionFactors,
             ({ value, unit }) => new Voltage({ value, unit }),
         );
