@@ -20,9 +20,7 @@ function makeScalarConversions<
     T extends StrictEnum<T>,
     R extends Scalar<T> = Scalar<T>,
 >(
-    factors: {
-        [keys in keyof T]: number;
-    },
+    factors: ConversionFactors<T>,
     constructor: ({ value, unit }: ScalarBuilder<T>) => R,
 ): ScalarConversion<T, R> {
     return (magnitude: BaseScalar<T>, to: keyof T): R => {

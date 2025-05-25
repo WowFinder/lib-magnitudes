@@ -7,7 +7,7 @@ import {
     Scalar,
     type ScalarBuilder,
 } from '../../core';
-import { timeConversionFactors } from '../Base';
+import { timeUnitConversionFactors } from '../Base';
 
 const EnergyUnit = {
     J: 'J',
@@ -17,7 +17,7 @@ Object.freeze(EnergyUnit);
 
 const energyConversionFactors: ConversionFactors<typeof EnergyUnit> = {
     J: 1,
-    Wh: timeConversionFactors.h,
+    Wh: timeUnitConversionFactors.h,
 } as const;
 Object.freeze(energyConversionFactors);
 

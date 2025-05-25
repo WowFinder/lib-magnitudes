@@ -16,7 +16,7 @@ describe('Base Magnitudes', () => {
             'massConversionFactors',
             'Time',
             'TimeUnit',
-            'timeConversionFactors',
+            'timeUnitConversionFactors',
         ]);
     });
 });

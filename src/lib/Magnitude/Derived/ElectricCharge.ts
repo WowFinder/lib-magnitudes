@@ -7,7 +7,7 @@ import {
     type Dimensionality,
     productDimensionality,
 } from '../../core';
-import { ElectricCurrent, Time, timeConversionFactors } from '../Base';
+import { ElectricCurrent, Time, timeUnitConversionFactors } from '../Base';
 
 const ElectricChargeUnit = {
     C: 'C',
@@ -21,7 +21,7 @@ const electricChargeConversionFactors: ConversionFactors<
 > = {
     C: 1,
     As: 1,
-    Ah: timeConversionFactors.h,
+    Ah: timeUnitConversionFactors.h,
 } as const;
 Object.freeze(electricChargeConversionFactors);
 
