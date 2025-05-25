@@ -5,7 +5,8 @@ import {
     Scalar,
     type ScalarBuilder,
 } from '../../core';
-import { timeConversionFactors } from '../Base';
+import { ElectricCurrent, Time, timeConversionFactors } from '../Base';
+import { type Dimensionality, productDimensionality } from '../../Units';
 
 const ElectricChargeUnit = {
     C: 'C',
@@ -40,6 +41,13 @@ class ElectricCharge extends Scalar<typeof ElectricChargeUnit> {
                     value,
                     unit,
                 }),
+        );
+    }
+
+    static get dimensions(): Dimensionality {
+        return productDimensionality(
+            ElectricCurrent.dimensions,
+            Time.dimensions,
         );
     }
 

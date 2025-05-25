@@ -5,6 +5,9 @@ import {
     Scalar,
     type ScalarBuilder,
 } from '../../core';
+import { type Dimensionality, dimensionalityRatio } from '../../Units';
+import { Time } from '../Base';
+import { Energy } from './Energy';
 
 const PowerUnit = {
     W: 'W',
@@ -27,6 +30,10 @@ class Power extends Scalar<typeof PowerUnit> {
             powerConversionFactors,
             ({ value, unit }) => new Power({ value, unit }),
         );
+    }
+
+    static get dimensions(): Dimensionality {
+        return dimensionalityRatio(Energy.dimensions, Time.dimensions);
     }
 
     convert(unit: keyof typeof PowerUnit): Power {

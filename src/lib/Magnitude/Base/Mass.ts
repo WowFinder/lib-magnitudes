@@ -5,6 +5,7 @@ import {
     Scalar,
     type ScalarBuilder,
 } from '../../core';
+import { type Dimensionality, fillDimensionality } from '../../Units';
 
 /* Note: while the SI base unit for mass is the kilogram (kg),
     the code uses the gram (g) as the basis for calculations.
@@ -40,6 +41,11 @@ class Mass extends Scalar<typeof MassUnit> {
             ({ value, unit }) => new Mass({ value, unit }),
         );
     }
+
+    static get dimensions(): Dimensionality {
+        return fillDimensionality({ M: 1 });
+    }
+
     convert(unit: keyof typeof MassUnit): Mass {
         // eslint-disable-next-line misc/typescript/no-unsafe-object-assignment
         return Mass.#converter(this, unit);

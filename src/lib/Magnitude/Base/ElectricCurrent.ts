@@ -5,6 +5,7 @@ import {
     Scalar,
     type ScalarBuilder,
 } from '../../core';
+import { type Dimensionality, fillDimensionality } from '../../Units';
 
 const ElectricCurrentUnit = {
     A: 'A',
@@ -36,6 +37,10 @@ class ElectricCurrent extends Scalar<typeof ElectricCurrentUnit> {
                     unit: unit,
                 }),
         );
+    }
+
+    static get dimensions(): Dimensionality {
+        return fillDimensionality({ I: 1 });
     }
 
     convert(unit: keyof typeof ElectricCurrentUnit): ElectricCurrent {

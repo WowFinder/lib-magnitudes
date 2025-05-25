@@ -5,6 +5,7 @@ import {
     Scalar,
     type ScalarBuilder,
 } from '../../core';
+import { type Dimensionality, fillDimensionality } from '../../Units';
 
 const LengthUnit = {
     // Base SI unit
@@ -50,6 +51,11 @@ class Length extends Scalar<typeof LengthUnit> {
             ({ value, unit }) => new Length({ value, unit }),
         );
     }
+
+    static get dimensions(): Dimensionality {
+        return fillDimensionality({ L: 1 });
+    }
+
     convert(unit: keyof typeof LengthUnit): Length {
         // eslint-disable-next-line misc/typescript/no-unsafe-object-assignment
         return Length.#converter(this, unit);
