@@ -2,26 +2,25 @@ import {
     type Dimensionality,
     makeVectorConversions,
     Vector3D,
+    type Vector3DBuilder,
 } from '../../core';
-import { Length, lengthConversionFactors, type LengthUnit } from './Length';
+import { Length, lengthConversionFactors, LengthUnit } from './Length';
 
 class Position extends Vector3D<typeof LengthUnit> {
-    static #convert = makeVectorConversions<typeof LengthUnit, Position>(
+    static readonly #convert = makeVectorConversions<
+        typeof LengthUnit,
+        Position
+    >(
         lengthConversionFactors,
         ({ x, y, z, unit }) => new Position({ x, y, z, unit }),
     );
 
     constructor({
-        x,
-        y,
-        z,
-        unit,
-    }: {
-        x: number;
-        y: number;
-        z: number;
-        unit: keyof typeof LengthUnit;
-    }) {
+        x = 0,
+        y = 0,
+        z = 0,
+        unit = LengthUnit.m,
+    }: Partial<Vector3DBuilder<typeof LengthUnit>>) {
         super({ x, y, z, unit });
     }
 

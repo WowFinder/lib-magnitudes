@@ -8,12 +8,20 @@ describe('Position', () => {
         expect(Position.dimensions).toEqual(fillDimensionality({ L: 1 }));
     });
 
+    it('should construct a Position instance with default values', () => {
+        const position = new Position({});
+        expect(position.x).toBe(0);
+        expect(position.y).toBe(0);
+        expect(position.z).toBe(0);
+        expect(position.unit).toBe(LengthUnit.m);
+    });
+
     it('should construct a Position instance with standard units', () => {
         const position = new Position({ x: 1, y: 2, z: 3, unit: LengthUnit.m });
         expect(position.x).toBe(1);
         expect(position.y).toBe(2);
         expect(position.z).toBe(3);
-        expect(position.unit).toBe('m');
+        expect(position.unit).toBe(LengthUnit.m);
     });
 
     it('should convert between different position units', () => {
@@ -28,18 +36,18 @@ describe('Position', () => {
         expect(positionInFeet.x).toBeCloseTo(3.28084, 3);
         expect(positionInFeet.y).toBeCloseTo(6.56168, 3);
         expect(positionInFeet.z).toBeCloseTo(9.84252, 3);
-        expect(positionInFeet.unit).toBe('ft');
+        expect(positionInFeet.unit).toBe(LengthUnit.ft);
 
         const positionInInches = positionInMeters.convert(LengthUnit.in);
         expect(positionInInches.x).toBeCloseTo(39.3701, 3);
         expect(positionInInches.y).toBeCloseTo(78.7402, 3);
         expect(positionInInches.z).toBeCloseTo(118.1102, 3);
-        expect(positionInInches.unit).toBe('in');
+        expect(positionInInches.unit).toBe(LengthUnit.in);
 
         const positionInMiles = positionInMeters.convert(LengthUnit.mile);
         expect(positionInMiles.x).toBeCloseTo(0.000621371, 6);
         expect(positionInMiles.y).toBeCloseTo(0.00124274, 6);
         expect(positionInMiles.z).toBeCloseTo(0.00186411, 6);
-        expect(positionInMiles.unit).toBe('mile');
+        expect(positionInMiles.unit).toBe(LengthUnit.mile);
     });
 });
