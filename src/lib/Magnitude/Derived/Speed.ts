@@ -41,18 +41,24 @@ const SpeedUnit: SpeedUnitEnum = Object.keys(LengthUnit).reduce((acc, l) => {
 Object.freeze(SpeedUnit);
 
 const speedUnitConversionFactors: ConversionFactors<SpeedUnitEnum> =
-    Object.keys(SpeedUnit).reduce((acc, key) => {
-        assertIsSpeedUnitKey(key);
-        const [l, t] = key.split('/');
-        const lengthFactor =
-            lengthConversionFactors[l as keyof typeof lengthConversionFactors];
-        const timeFactor =
-            timeUnitConversionFactors[
-                t as keyof typeof timeUnitConversionFactors
-            ];
-        (acc as any)[key] = lengthFactor / timeFactor;
-        return acc;
-    }, {} as ConversionFactors<SpeedUnitEnum>);
+    Object.keys(SpeedUnit).reduce(
+        (acc, key) => {
+            assertIsSpeedUnitKey(key);
+            const [l, t] = key.split('/');
+            const lengthFactor =
+                lengthConversionFactors[
+                    l as keyof typeof lengthConversionFactors
+                ];
+            const timeFactor =
+                timeUnitConversionFactors[
+                    t as keyof typeof timeUnitConversionFactors
+                ];
+            acc[key as keyof ConversionFactors<SpeedUnitEnum>] =
+                lengthFactor / timeFactor;
+            return acc;
+        },
+        {} as Record<SpeedUnitEnum[keyof SpeedUnitEnum], number>,
+    );
 Object.freeze(speedUnitConversionFactors);
 
 class Speed extends Scalar<typeof SpeedUnit> {
