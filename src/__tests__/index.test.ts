@@ -9,6 +9,9 @@ describe('main index', () => {
             'fillDimensionality',
             'prefixMatchers',
             'makeConversions',
+            'Time',
+            'Energy',
+            'electricChargePerTime',
         ]);
     });
 });
