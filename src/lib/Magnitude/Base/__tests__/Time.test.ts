@@ -1,4 +1,4 @@
-import { fillDimensionality } from '../../../Units';
+import { fillDimensionality } from '../../../core';
 import { TimeUnit, Time } from '../Time';
 import { describe, expect, it } from 'vitest';
 

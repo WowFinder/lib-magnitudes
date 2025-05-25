@@ -1,4 +1,4 @@
-import { fillDimensionality } from '../../../Units';
+import { fillDimensionality } from '../../../core';
 import { VoltageUnit, Voltage } from '../Voltage';
 import { describe, it, expect } from 'vitest';
 

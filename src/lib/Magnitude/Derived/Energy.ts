@@ -1,12 +1,13 @@
 import {
     type Conversion,
     type ConversionFactors,
+    type Dimensionality,
+    fillDimensionality,
     makeConversions,
     Scalar,
     type ScalarBuilder,
 } from '../../core';
 import { timeConversionFactors } from '../Base';
-import { type Dimensionality, fillDimensionality } from '../../Units';
 
 const EnergyUnit = {
     J: 'J',

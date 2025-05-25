@@ -4,8 +4,9 @@ import {
     makeConversions,
     Scalar,
     type ScalarBuilder,
+    type Dimensionality,
+    dimensionalityRatio,
 } from '../../core';
-import { type Dimensionality, dimensionalityRatio } from '../../Units';
 import { Time } from '../Base';
 import { Energy } from './Energy';
 

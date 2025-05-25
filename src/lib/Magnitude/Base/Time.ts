@@ -4,8 +4,9 @@ import {
     makeConversions,
     Scalar,
     type ScalarBuilder,
+    type Dimensionality,
+    fillDimensionality,
 } from '../../core';
-import { type Dimensionality, fillDimensionality } from '../../Units';
 
 const TimeUnit = {
     s: 's',

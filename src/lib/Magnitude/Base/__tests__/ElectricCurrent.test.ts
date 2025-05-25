@@ -1,4 +1,4 @@
-import { fillDimensionality } from '../../../Units';
+import { fillDimensionality } from '../../../core';
 import { ElectricCurrentUnit, ElectricCurrent } from '../ElectricCurrent';
 import { describe, expect, it } from 'vitest';
 
