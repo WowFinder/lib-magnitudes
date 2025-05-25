@@ -38,4 +38,4 @@ class Velocity extends Vector3D<typeof SpeedUnit> {
     }
 }
 
-export { Velocity, SpeedUnit, speedUnitConversionFactors };
+export { Velocity };
