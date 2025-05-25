@@ -6,6 +6,10 @@ type KeyAsValueObject<T extends string> = {
     [K in T]: K;
 };
 
+type StrictEnum<T> = KeyAsValueObject<keyof T & string>;
+
+const defaultPrecision = 3;
+
 function unitParser<T extends KeyAsValueObject<keyof T & string>>(
     unitEnum: T,
 ): Parser<keyof T> {
@@ -19,5 +23,10 @@ function unitParser<T extends KeyAsValueObject<keyof T & string>>(
     };
 }
 
-export type { Parser, KeyAsValueObject };
-export { unitParser };
+export {
+    type Parser,
+    type KeyAsValueObject,
+    type StrictEnum,
+    unitParser,
+    defaultPrecision,
+};

@@ -1,4 +1,3 @@
-import { type PrefixSpec } from '../../core';
 import { unitParser } from '../helpers';
 import { Scalar } from '../Scalar';
 
@@ -21,13 +20,6 @@ const sampleTimeConversionFactors: {
     m: 60,
 };
 
-const milliPrefix: PrefixSpec = {
-    symbol: 'm',
-    exp: -3,
-    siName: 'milli',
-    auxiliar: false,
-};
-
 class SampleTimeImpl extends Scalar<typeof SampleTimeUnits> {
     constructor(builder: SampleTimeBuilder) {
         super(builder);
@@ -35,8 +27,8 @@ class SampleTimeImpl extends Scalar<typeof SampleTimeUnits> {
 
     convert(to: keyof typeof SampleTimeUnits): SampleTimeImpl {
         const factor =
-            sampleTimeConversionFactors[to] /
-            sampleTimeConversionFactors[this.unit];
+            sampleTimeConversionFactors[this.unit] /
+            sampleTimeConversionFactors[to];
         return new SampleTimeImpl({
             value: this.value * factor,
             unit: to,
@@ -49,6 +41,5 @@ export {
     sampleTimeUnitParser,
     type SampleTimeBuilder,
     sampleTimeConversionFactors,
-    milliPrefix,
     SampleTimeImpl,
 };

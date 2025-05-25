@@ -55,7 +55,7 @@ describe('Length', () => {
         const distanceInMeters = andromedaDistance.convert(LengthUnit.m);
         expect(distanceInMeters.value).toBeCloseTo(2.40017959e22, 0);
         expect(distanceInMeters.unit).toBe('m');
-        expect(distanceInMeters.toString()).toBe('24.002 Zm');
+        expect(distanceInMeters.toString()).toBe('24.0 Zm');
     });
     it('should convert microscopic units', () => {
         const plankLength = new Length({ value: 1, unit: LengthUnit.lp });
@@ -70,6 +70,6 @@ describe('Length', () => {
         const angstromLengthInMeters = angstromLength.convert(LengthUnit.m);
         expect(angstromLengthInMeters.value).toBeCloseTo(1e-10, 7);
         expect(angstromLengthInMeters.unit).toBe('m');
-        expect(angstromLengthInMeters.toString()).toBe('100.000 pm');
+        expect(angstromLengthInMeters.toString()).toBe('100 pm');
     });
 });
