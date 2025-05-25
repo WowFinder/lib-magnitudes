@@ -28,11 +28,11 @@ function assertIsAccelerationUnitKey(
     key: string,
 ): asserts key is AccelerationUnitKey {
     if (!accelerationUnitKeyRegEx.test(key)) {
-        throw new Error(`Invalid ScalarAccelerationUnit key: ${key}`);
+        throw new Error(`Invalid AccelerationUnit key: ${key}`);
     }
 }
-type ScalarAccelerationUnitEnum = KeyAsValueObject<AccelerationUnitKey>;
-const AccelerationUnit: ScalarAccelerationUnitEnum = Object.keys(
+type AccelerationUnitEnum = KeyAsValueObject<AccelerationUnitKey>;
+const AccelerationUnit: AccelerationUnitEnum = Object.keys(
     LengthUnit,
 ).reduce((acc, l) => {
     Object.keys(TimeUnit).forEach(t => {
@@ -41,10 +41,10 @@ const AccelerationUnit: ScalarAccelerationUnitEnum = Object.keys(
         (acc as any)[key] = key;
     });
     return acc;
-}, {} as ScalarAccelerationUnitEnum);
+}, {} as AccelerationUnitEnum);
 Object.freeze(AccelerationUnit);
 
-const accelerationUnitConversionFactors: ConversionFactors<ScalarAccelerationUnitEnum> =
+const accelerationUnitConversionFactors: ConversionFactors<AccelerationUnitEnum> =
     Object.keys(AccelerationUnit).reduce(
         (acc, key) => {
             assertIsAccelerationUnitKey(key);
@@ -62,7 +62,7 @@ const accelerationUnitConversionFactors: ConversionFactors<ScalarAccelerationUni
             return acc;
         },
         {} as Record<
-            ScalarAccelerationUnitEnum[keyof ScalarAccelerationUnitEnum],
+            AccelerationUnitEnum[keyof AccelerationUnitEnum],
             number
         >,
     );

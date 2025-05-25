@@ -13,16 +13,16 @@ describe('ScalarAcceleration', () => {
         );
     });
 
-    describe('assertIsScalarAccelerationUnitKey', () => {
-        it('should return true for valid ScalarAccelerationUnit keys', () => {
+    describe('assertIsAccelerationUnitKey', () => {
+        it('should return true for valid AccelerationUnit keys', () => {
             expect(() => assertIsAccelerationUnitKey('m/s²')).not.toThrow();
             expect(() => assertIsAccelerationUnitKey('mile/h²')).not.toThrow();
             expect(() => assertIsAccelerationUnitKey('ft/s²')).not.toThrow();
         });
 
-        it('should throw an error for invalid ScalarAccelerationUnit keys', () => {
+        it('should throw an error for invalid AccelerationUnit keys', () => {
             expect(() => assertIsAccelerationUnitKey('invalid')).toThrow(
-                'Invalid ScalarAccelerationUnit key: invalid',
+                'Invalid AccelerationUnit key: invalid',
             );
         });
     });
