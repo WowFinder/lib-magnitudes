@@ -32,7 +32,7 @@ describe('Power formulae', () => {
             const time = new Time({ value: 15, unit: TimeUnit.m });
             const power = energyPerTime(energy, time);
             expect(power).toBeDefined();
-            expect(power.value).toBeCloseTo(0.222222, 6); // 200 J / (15 min * 60 s/min) = 22.2222 W
+            expect(power.value).toBeCloseTo(0.222222, 6); // 200 J / (15 min * 60 s/min) = 0.222222 W
             expect(power.unit).toBe(PowerUnit.W);
         });
 
