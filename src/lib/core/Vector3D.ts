@@ -1,6 +1,6 @@
 import { type KeyAsValueObject, defaultPrecision } from './helpers';
 import { bestPrefixByValue, type PrefixSpec } from './Prefix';
-import { type Scalar, type ScalarBuilder } from './Scalar';
+import { type ScalarBuilder } from './Scalar';
 
 type Vector3DBuilder<T extends KeyAsValueObject<keyof T & string>> = {
     x: number;
@@ -64,13 +64,11 @@ class BaseVector3D<T extends KeyAsValueObject<keyof T & string>> {
         return this.toPrefixedString(defaultPrecision);
     }
 
-    magnitude<S extends Scalar<T> = Scalar<T>>(
-        ctor: (builder: ScalarBuilder<T>) => S,
-    ): S {
-        return ctor({
+    protected get magnitudeBuilder(): ScalarBuilder<T> {
+        return {
             value: Math.sqrt(this.#x ** 2 + this.#y ** 2 + this.#z ** 2),
             unit: this.#unit,
-        });
+        };
     }
 }
 

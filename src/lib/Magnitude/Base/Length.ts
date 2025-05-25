@@ -1,7 +1,7 @@
 import {
-    type Conversion,
+    type ScalarConversion,
     type ConversionFactors,
-    makeConversions,
+    makeScalarConversions,
     Scalar,
     type ScalarBuilder,
     type Dimensionality,
@@ -41,13 +41,13 @@ const lengthConversionFactors: ConversionFactors<typeof LengthUnit> = {
 Object.freeze(lengthConversionFactors);
 
 class Length extends Scalar<typeof LengthUnit> {
-    static #converter: Conversion<typeof LengthUnit, Length>;
+    static #converter: ScalarConversion<typeof LengthUnit, Length>;
     constructor({ value, unit }: ScalarBuilder<typeof LengthUnit>) {
         super({ value, unit });
     }
 
     static {
-        Length.#converter = makeConversions<typeof LengthUnit, Length>(
+        Length.#converter = makeScalarConversions<typeof LengthUnit, Length>(
             lengthConversionFactors,
             ({ value, unit }) => new Length({ value, unit }),
         );

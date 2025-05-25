@@ -15,6 +15,28 @@ const samplePositionConversionFactors: {
     in: 0.0254,
 };
 
+type SampleLengthBuilder = {
+    readonly value: number;
+    readonly unit: keyof typeof SamplePositionUnits;
+};
+
+class SampleLengthImpl extends Scalar<typeof SamplePositionUnits> {
+    constructor(builder: SampleLengthBuilder) {
+        super(builder);
+    }
+
+    convert(to: keyof typeof SamplePositionUnits): SampleLengthImpl {
+        const factor =
+            samplePositionConversionFactors[this.unit] /
+            samplePositionConversionFactors[to];
+
+        return new SampleLengthImpl({
+            value: this.value * factor,
+            unit: to,
+        });
+    }
+}
+
 type SamplePositionBuilder = {
     readonly x?: number;
     readonly y?: number;
@@ -43,27 +65,9 @@ class SamplePositionImpl extends Vector3D<typeof SamplePositionUnits> {
             unit: to,
         });
     }
-}
 
-type SampleLengthBuilder = {
-    readonly value: number;
-    readonly unit: keyof typeof SamplePositionUnits;
-};
-
-class SampleLengthImpl extends Scalar<typeof SamplePositionUnits> {
-    constructor(builder: SampleLengthBuilder) {
-        super(builder);
-    }
-
-    convert(to: keyof typeof SamplePositionUnits): SampleLengthImpl {
-        const factor =
-            samplePositionConversionFactors[this.unit] /
-            samplePositionConversionFactors[to];
-
-        return new SampleLengthImpl({
-            value: this.value * factor,
-            unit: to,
-        });
+    get magnitude(): SampleLengthImpl {
+        return new SampleLengthImpl(this.magnitudeBuilder);
     }
 }
 

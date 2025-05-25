@@ -8,7 +8,7 @@ describe('lib index', () => {
             'Scalar',
             'fillDimensionality',
             'prefixMatchers',
-            'makeConversions',
+            'makeScalarConversions',
             'Time',
             'Energy',
             'electricChargePerTime',
