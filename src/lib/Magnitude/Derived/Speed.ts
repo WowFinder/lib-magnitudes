@@ -53,8 +53,7 @@ const speedUnitConversionFactors: ConversionFactors<SpeedUnitEnum> =
                 timeUnitConversionFactors[
                     t as keyof typeof timeUnitConversionFactors
                 ];
-            acc[key as keyof ConversionFactors<SpeedUnitEnum>] =
-                lengthFactor / timeFactor;
+            acc[key] = lengthFactor / timeFactor;
             return acc;
         },
         {} as Record<SpeedUnitEnum[keyof SpeedUnitEnum], number>,

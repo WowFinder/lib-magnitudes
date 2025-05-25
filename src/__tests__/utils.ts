@@ -15,8 +15,8 @@ function expectExportsExactly(
     expectedExports: string[],
 ): void {
     const keys = Object.keys(module);
-    expect(keys.length).toBe(expectedExports.length);
     expectedExports.forEach(key => expectModuleHasKey(module, key));
+    expect(keys.length).toBe(expectedExports.length);
 }
 
 function expectExportsAtLeast(

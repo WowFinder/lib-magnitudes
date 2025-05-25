@@ -6,16 +6,16 @@ import {
 } from '../../core';
 import {
     ScalarAcceleration,
-    ScalarAccelerationUnit,
-    scalarAccelerationUnitConversionFactors,
+    AccelerationUnit,
+    accelerationUnitConversionFactors,
 } from './ScalarAcceleration';
 
-class Acceleration extends Vector3D<typeof ScalarAccelerationUnit> {
+class Acceleration extends Vector3D<typeof AccelerationUnit> {
     static readonly #convert = makeVectorConversions<
-        typeof ScalarAccelerationUnit,
+        typeof AccelerationUnit,
         Acceleration
     >(
-        scalarAccelerationUnitConversionFactors,
+        accelerationUnitConversionFactors,
         ({ x, y, z, unit }) => new Acceleration({ x, y, z, unit }),
     );
 
@@ -23,10 +23,8 @@ class Acceleration extends Vector3D<typeof ScalarAccelerationUnit> {
         x = 0,
         y = 0,
         z = 0,
-        unit = ScalarAccelerationUnit[
-            'm/s²' as keyof typeof ScalarAccelerationUnit
-        ],
-    }: Partial<Vector3DBuilder<typeof ScalarAccelerationUnit>>) {
+        unit = AccelerationUnit['m/s²' as keyof typeof AccelerationUnit],
+    }: Partial<Vector3DBuilder<typeof AccelerationUnit>>) {
         super({ x, y, z, unit });
     }
 
@@ -38,13 +36,9 @@ class Acceleration extends Vector3D<typeof ScalarAccelerationUnit> {
         return ScalarAcceleration.dimensions;
     }
 
-    convert(unit: keyof typeof ScalarAccelerationUnit): Acceleration {
+    convert(unit: keyof typeof AccelerationUnit): Acceleration {
         // eslint-disable-next-line misc/typescript/no-unsafe-object-assignment
         return Acceleration.#convert(this, unit);
     }
 }
-export {
-    Acceleration,
-    ScalarAccelerationUnit,
-    scalarAccelerationUnitConversionFactors,
-};
+export { Acceleration };

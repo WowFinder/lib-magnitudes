@@ -1,8 +1,8 @@
 import { fillDimensionality } from '../../../core';
 import {
     ScalarAcceleration,
-    ScalarAccelerationUnit,
-    assertIsScalarAccelerationUnitKey,
+    AccelerationUnit,
+    assertIsAccelerationUnitKey,
 } from '../ScalarAcceleration';
 import { describe, expect, it } from 'vitest';
 
@@ -15,19 +15,13 @@ describe('ScalarAcceleration', () => {
 
     describe('assertIsScalarAccelerationUnitKey', () => {
         it('should return true for valid ScalarAccelerationUnit keys', () => {
-            expect(() =>
-                assertIsScalarAccelerationUnitKey('m/s²'),
-            ).not.toThrow();
-            expect(() =>
-                assertIsScalarAccelerationUnitKey('mile/h²'),
-            ).not.toThrow();
-            expect(() =>
-                assertIsScalarAccelerationUnitKey('ft/s²'),
-            ).not.toThrow();
+            expect(() => assertIsAccelerationUnitKey('m/s²')).not.toThrow();
+            expect(() => assertIsAccelerationUnitKey('mile/h²')).not.toThrow();
+            expect(() => assertIsAccelerationUnitKey('ft/s²')).not.toThrow();
         });
 
         it('should throw an error for invalid ScalarAccelerationUnit keys', () => {
-            expect(() => assertIsScalarAccelerationUnitKey('invalid')).toThrow(
+            expect(() => assertIsAccelerationUnitKey('invalid')).toThrow(
                 'Invalid ScalarAccelerationUnit key: invalid',
             );
         });
@@ -39,7 +33,7 @@ describe('ScalarAcceleration', () => {
             unit: 'm/s²',
         });
         expect(acceleration.value).toBe(1);
-        expect(acceleration.unit).toBe(ScalarAccelerationUnit['m/s²']);
+        expect(acceleration.unit).toBe(AccelerationUnit['m/s²']);
     });
 
     it('should convert between different acceleration units', () => {
