@@ -6,6 +6,7 @@ import {
     type ScalarBuilder,
 } from '../../core';
 import { timeConversionFactors } from '../Base';
+import { type Dimensionality, fillDimensionality } from '../../Units';
 
 const EnergyUnit = {
     J: 'J',
@@ -30,6 +31,11 @@ class Energy extends Scalar<typeof EnergyUnit> {
             energyConversionFactors,
             ({ value, unit }) => new Energy({ value, unit }),
         );
+    }
+
+    static get dimensions(): Dimensionality {
+        // TODO: compute from the work definition (force * length)
+        return fillDimensionality({ M: 1, L: 2, T: -2 });
     }
 
     convert(unit: keyof typeof EnergyUnit): Energy {

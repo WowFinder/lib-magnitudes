@@ -1,12 +1,22 @@
 import {
     matchPartialDimensionalities,
+    dimensionalityRatio,
     type DimensionalityBuilder,
+    fillDimensionality,
 } from '../Dimensionality';
 import { describe, it, expect } from 'vitest';
 
 describe('Dimensionality', () => {
     const lengthDimensionality: DimensionalityBuilder = {
         L: 1,
+    } as const;
+
+    const timeDimensionality: DimensionalityBuilder = {
+        T: 1,
+    } as const;
+
+    const flatAngleDimensionality: DimensionalityBuilder = {
+        α: 1,
     } as const;
 
     const torqueDimensionality: DimensionalityBuilder = {
@@ -48,6 +58,27 @@ describe('Dimensionality', () => {
                     angularFrequencyDimensionality,
                 ),
             ).toBe(false);
+        });
+    });
+    describe('dimensionalityRatio', () => {
+        it('should return the correct dimensionality ratio', () => {
+            const angularFrequencyRatio = dimensionalityRatio(
+                flatAngleDimensionality,
+                timeDimensionality,
+            );
+            expect(angularFrequencyRatio).toEqual(
+                fillDimensionality(angularFrequencyDimensionality),
+            );
+            const lengthPerAngle = dimensionalityRatio(
+                lengthDimensionality,
+                flatAngleDimensionality,
+            );
+            expect(lengthPerAngle).toEqual(
+                fillDimensionality({
+                    L: 1,
+                    α: -1,
+                } as const),
+            );
         });
     });
 });

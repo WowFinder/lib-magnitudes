@@ -1,7 +1,11 @@
+import { fillDimensionality } from '../../../Units';
 import { LengthUnit, Length } from '../Length';
 import { describe, expect, it } from 'vitest';
 
 describe('Length', () => {
+    it('should have the correct dimensions', () => {
+        expect(Length.dimensions).toEqual(fillDimensionality({ L: 1 }));
+    });
     it('should construct a Length instance with standard units', () => {
         const length = new Length({ value: 1, unit: LengthUnit.m });
         expect(length.value).toBe(1);

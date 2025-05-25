@@ -1,7 +1,13 @@
+import { fillDimensionality } from '../../../Units';
 import { ElectricCurrentUnit, ElectricCurrent } from '../ElectricCurrent';
 import { describe, expect, it } from 'vitest';
 
 describe('ElectricCurrent', () => {
+    it('should have the correct dimensions', () => {
+        expect(ElectricCurrent.dimensions).toEqual(
+            fillDimensionality({ I: 1 }),
+        );
+    });
     it('should construct an ElectricCurrent instance with standard units', () => {
         const current = new ElectricCurrent({
             value: 1,

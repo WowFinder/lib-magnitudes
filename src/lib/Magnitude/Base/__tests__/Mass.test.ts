@@ -1,7 +1,11 @@
+import { fillDimensionality } from '../../../Units';
 import { MassUnit, Mass } from '../Mass';
 import { describe, expect, it } from 'vitest';
 
 describe('Mass', () => {
+    it('should have the correct dimensions', () => {
+        expect(Mass.dimensions).toEqual(fillDimensionality({ M: 1 }));
+    });
     it('should construct a Mass instance with standard units', () => {
         const mass = new Mass({ value: 1, unit: MassUnit.g });
         expect(mass.value).toBe(1);

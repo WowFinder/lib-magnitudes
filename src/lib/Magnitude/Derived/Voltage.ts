@@ -5,6 +5,9 @@ import {
     Scalar,
     type ScalarBuilder,
 } from '../../core';
+import { type Dimensionality, dimensionalityRatio } from '../../Units';
+import { ElectricCharge } from './ElectricCharge';
+import { Energy } from './Energy';
 
 const VoltageUnit = {
     V: 'V',
@@ -26,6 +29,13 @@ class Voltage extends Scalar<typeof VoltageUnit> {
         Voltage.#converter = makeConversions<typeof VoltageUnit, Voltage>(
             voltageConversionFactors,
             ({ value, unit }) => new Voltage({ value, unit }),
+        );
+    }
+
+    static get dimensions(): Dimensionality {
+        return dimensionalityRatio(
+            Energy.dimensions,
+            ElectricCharge.dimensions,
         );
     }
 

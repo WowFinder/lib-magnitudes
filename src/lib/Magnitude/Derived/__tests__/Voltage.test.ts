@@ -1,7 +1,13 @@
+import { fillDimensionality } from '../../../Units';
 import { VoltageUnit, Voltage } from '../Voltage';
 import { describe, it, expect } from 'vitest';
 
 describe('Voltage', () => {
+    it('should have the correct dimensions', () => {
+        expect(Voltage.dimensions).toEqual(
+            fillDimensionality({ M: 1, L: 2, T: -3, I: -1 }),
+        );
+    });
     it('should construct a Voltage instance with standard units', () => {
         const voltage = new Voltage({
             value: 1,

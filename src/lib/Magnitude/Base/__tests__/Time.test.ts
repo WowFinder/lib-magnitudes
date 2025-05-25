@@ -1,7 +1,11 @@
+import { fillDimensionality } from '../../../Units';
 import { TimeUnit, Time } from '../Time';
 import { describe, expect, it } from 'vitest';
 
 describe('Time', () => {
+    it('should have the correct dimensions', () => {
+        expect(Time.dimensions).toEqual(fillDimensionality({ T: 1 }));
+    });
     it('should construct a Time instance with standard units', () => {
         const time = new Time({ value: 1, unit: TimeUnit.s });
         expect(time.value).toBe(1);

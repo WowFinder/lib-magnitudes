@@ -1,7 +1,13 @@
+import { fillDimensionality } from '../../../Units';
 import { ElectricChargeUnit, ElectricCharge } from '../ElectricCharge';
 import { describe, expect, it } from 'vitest';
 
 describe('ElectricCharge', () => {
+    it('should have the correct dimensions', () => {
+        expect(ElectricCharge.dimensions).toEqual(
+            fillDimensionality({ T: 1, I: 1 }),
+        );
+    });
     it('should construct an ElectricCharge instance with standard units', () => {
         const charge = new ElectricCharge({
             value: 1,

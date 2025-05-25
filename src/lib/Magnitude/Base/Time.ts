@@ -5,6 +5,7 @@ import {
     Scalar,
     type ScalarBuilder,
 } from '../../core';
+import { type Dimensionality, fillDimensionality } from '../../Units';
 
 const TimeUnit = {
     s: 's',
@@ -33,6 +34,10 @@ class Time extends Scalar<typeof TimeUnit> {
             timeConversionFactors,
             ({ value, unit }) => new Time({ value, unit }),
         );
+    }
+
+    static get dimensions(): Dimensionality {
+        return fillDimensionality({ T: 1 });
     }
 
     convert(unit: keyof typeof TimeUnit): Time {
