@@ -4,7 +4,11 @@ import {
     bestPrefixByValue,
     prefixMatchers,
 } from './Prefix';
-import { type KeyAsValueObject, type Parser } from './helpers';
+import {
+    defaultPrecision,
+    type KeyAsValueObject,
+    type Parser,
+} from './helpers';
 
 const prefixedScalarMatcher = new RegExp(
     `^([+-]?\\d+(?:\\.\\d*)?(?:[eE][+-]?\\d+)?)\\s*${prefixMatchers.capturingOptional}(\\p{L}*)$`,
@@ -14,16 +18,15 @@ const prefixedScalarMatcher = new RegExp(
 const unprefixedScalarMatcher =
     /^([+-]?\d+(?:\.\d*)?(?:[eE][+-]?\d+)?)\s*(\p{L}*)$/u;
 
-const defaultPrecision = 3;
-
-interface ScalarBuilder<T extends KeyAsValueObject<keyof T & string>> {
-    value: number;
-    unit: keyof T;
-}
+type ScalarBuilder<T extends KeyAsValueObject<keyof T & string>> = {
+    readonly value: number;
+    readonly unit: keyof T;
+};
 
 class BaseScalar<T extends KeyAsValueObject<keyof T & string>> {
     readonly #value: number;
     readonly #unit: keyof T;
+
     constructor({ value, unit }: ScalarBuilder<T>) {
         this.#value = value;
         this.#unit = unit;
@@ -44,7 +47,7 @@ class BaseScalar<T extends KeyAsValueObject<keyof T & string>> {
     toPrefixedString(digits: number, prefix?: PrefixSpec): string {
         prefix ??= bestPrefixByValue(this.#value);
         const value = this.#value / Math.pow(10, prefix.exp);
-        return `${value.toFixed(digits)} ${prefix.symbol}${String(this.#unit)}`;
+        return `${value.toPrecision(digits)} ${prefix.symbol}${String(this.#unit)}`;
     }
 
     toString(): string {
