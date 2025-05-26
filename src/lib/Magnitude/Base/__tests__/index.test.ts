@@ -14,6 +14,7 @@ describe('Base Magnitudes', () => {
             'Mass',
             'MassUnit',
             'massConversionFactors',
+            'Position',
             'Time',
             'TimeUnit',
             'timeUnitConversionFactors',
