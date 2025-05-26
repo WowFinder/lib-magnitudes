@@ -6,6 +6,15 @@ type KeyAsValueObject<T extends string> = {
     [K in T]: K;
 };
 
+function assertIsValidKey<T extends string>(
+    key: string,
+    enumObject: Readonly<KeyAsValueObject<T>>,
+): asserts key is T {
+    if (!(key in enumObject)) {
+        throw new Error(`Invalid key: ${key}`);
+    }
+}
+
 type StrictEnum<T> = KeyAsValueObject<keyof T & string>;
 
 const defaultPrecision = 3;
@@ -28,5 +37,6 @@ export {
     type KeyAsValueObject,
     type StrictEnum,
     unitParser,
+    assertIsValidKey,
     defaultPrecision,
 };

@@ -47,6 +47,14 @@ describe('ScalarAcceleration', () => {
         expect(accelerationInMilesPerHourSquared.value).toBeCloseTo(8052.97, 2);
         expect(accelerationInMilesPerHourSquared.unit).toBe('mile/h²');
 
+        const accelerationInYardsPerMinutePerSecond =
+            accelerationInMetersPerSecondSquared.convert('yd/m/s');
+        expect(accelerationInYardsPerMinutePerSecond.value).toBeCloseTo(
+            65.6167979,
+            5,
+        );
+        expect(accelerationInYardsPerMinutePerSecond.unit).toBe('yd/m/s');
+
         const accelerationInFeetPerSecondSquared =
             accelerationInMetersPerSecondSquared.convert('ft/s²');
         expect(accelerationInFeetPerSecondSquared.value).toBeCloseTo(

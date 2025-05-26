@@ -6,7 +6,7 @@ import {
     Scalar,
     type ScalarBuilder,
 } from '../../core';
-import { type KeyAsValueObject } from '../../core/helpers';
+import { assertIsValidKey, type KeyAsValueObject } from '../../core/helpers';
 
 import {
     lengthConversionFactors,
@@ -18,11 +18,16 @@ import {
 import { Speed } from './Speed';
 
 type AccelerationUnitKey =
-    `${keyof typeof LengthUnit}/${keyof typeof TimeUnit}²`;
-const lengthUnit = Object.keys(LengthUnit);
-const timeUnit = Object.keys(TimeUnit);
+    | `${keyof typeof LengthUnit}/${keyof typeof TimeUnit}²`
+    | `${keyof typeof LengthUnit}/${keyof typeof TimeUnit}/${keyof typeof TimeUnit}`;
+const lengthUnitKeys = Object.keys(LengthUnit);
+const timeUnitKeys = Object.keys(TimeUnit);
+const lengthUnitMatcher = `(${lengthUnitKeys.join('|')})`;
+const timeUnitMatcher = `(${timeUnitKeys.join('|')})`;
+const accelerationSquareUnitMatcher = `${lengthUnitMatcher}/${timeUnitMatcher}²`;
+const accelerationSplitUnitMatcher = `${lengthUnitMatcher}/${timeUnitMatcher}/${timeUnitMatcher}`;
 const accelerationUnitKeyRegEx = new RegExp(
-    `^(${lengthUnit.join('|')})/(${timeUnit.join('|')})²$`,
+    `^(?:${accelerationSquareUnitMatcher}|${accelerationSplitUnitMatcher})$`,
 );
 function assertIsAccelerationUnitKey(
     key: string,
@@ -31,41 +36,53 @@ function assertIsAccelerationUnitKey(
         throw new Error(`Invalid AccelerationUnit key: ${key}`);
     }
 }
+
 type AccelerationUnitEnum = KeyAsValueObject<AccelerationUnitKey>;
-const AccelerationUnit: AccelerationUnitEnum = Object.keys(
-    LengthUnit,
-).reduce((acc, l) => {
-    Object.keys(TimeUnit).forEach(t => {
-        const key = `${l}/${t}²` as AccelerationUnitKey;
-        assertIsAccelerationUnitKey(key);
-        (acc as any)[key] = key;
-    });
-    return acc;
-}, {} as AccelerationUnitEnum);
+
+const conversionFactorsBuilder = {} as Record<
+    AccelerationUnitEnum[keyof AccelerationUnitEnum],
+    number
+>;
+
+function lengthFactor(key: string): number {
+    return lengthConversionFactors[key as keyof typeof lengthConversionFactors];
+}
+
+function timeFactor(key: string): number {
+    return timeUnitConversionFactors[
+        key as keyof typeof timeUnitConversionFactors
+    ];
+}
+
+const AccelerationUnit = Object.keys(LengthUnit).reduce(
+    (acc, l) => {
+        assertIsValidKey(l, LengthUnit);
+        Object.keys(TimeUnit).forEach(t1 => {
+            assertIsValidKey(t1, TimeUnit);
+            Object.keys(TimeUnit).forEach(t2 => {
+                assertIsValidKey(t2, TimeUnit);
+                const key = `${l}/${t1}/${t2}` as AccelerationUnitKey;
+                assertIsAccelerationUnitKey(key);
+                acc[key] = key;
+                const factor =
+                    lengthFactor(l) / timeFactor(t1) / timeFactor(t2);
+                conversionFactorsBuilder[key] = factor;
+                if (t1 === t2) {
+                    const keySq = `${l}/${t1}²` as AccelerationUnitKey;
+                    assertIsAccelerationUnitKey(keySq);
+                    acc[keySq] = keySq;
+                    conversionFactorsBuilder[keySq] = factor;
+                }
+            });
+        });
+        return acc;
+    },
+    {} as Record<AccelerationUnitKey, AccelerationUnitKey>,
+) as AccelerationUnitEnum;
 Object.freeze(AccelerationUnit);
 
-const accelerationUnitConversionFactors: ConversionFactors<AccelerationUnitEnum> =
-    Object.keys(AccelerationUnit).reduce(
-        (acc, key) => {
-            assertIsAccelerationUnitKey(key);
-            const parsed = accelerationUnitKeyRegEx.exec(key)!;
-            const [, l, t] = parsed;
-            const lengthFactor =
-                lengthConversionFactors[
-                    l as keyof typeof lengthConversionFactors
-                ];
-            const timeFactor =
-                timeUnitConversionFactors[
-                    t as keyof typeof timeUnitConversionFactors
-                ];
-            acc[key] = lengthFactor / Math.pow(timeFactor, 2);
-            return acc;
-        },
-        {} as Record<
-            AccelerationUnitEnum[keyof AccelerationUnitEnum],
-            number
-        >,
-    );
+const accelerationUnitConversionFactors =
+    conversionFactorsBuilder as ConversionFactors<AccelerationUnitEnum>;
 Object.freeze(accelerationUnitConversionFactors);
 
 class ScalarAcceleration extends Scalar<typeof AccelerationUnit> {
