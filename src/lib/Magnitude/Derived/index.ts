@@ -2,8 +2,6 @@ export * from './Acceleration';
 export * from './ElectricCharge';
 export * from './Energy';
 export * from './Power';
-export * from './ScalarAcceleration';
-export * from './Speed';
 export * from './Velocity';
 export * from './Voltage';
 /* TODO: missing SI derived units:
