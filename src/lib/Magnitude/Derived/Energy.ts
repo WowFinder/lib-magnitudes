@@ -12,12 +12,14 @@ import { timeUnitConversionFactors } from '../Base';
 const EnergyUnit = {
     J: 'J',
     Wh: 'Wh',
+    eV: 'eV',
 } as const;
 Object.freeze(EnergyUnit);
 
 const energyConversionFactors: ConversionFactors<typeof EnergyUnit> = {
     J: 1,
     Wh: timeUnitConversionFactors.h,
+    eV: 1.602176634e-19,
 } as const;
 Object.freeze(energyConversionFactors);
 

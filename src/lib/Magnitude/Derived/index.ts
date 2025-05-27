@@ -23,6 +23,12 @@ export * from './Voltage';
   - DoseEquivalent (sievert)
   - CatalyticActivity (katal)
  */
+/* TODO: magnitudes without named units:
+  - LuminousEfficacy (lm/W) (necessary to define K_cd constant)
+  - Area (scalar) / Surface (vectorial) (m²)
+  - Volume (m³)
+  - Density / VolumetricMassDensity (kg/m³)
+ */
 /* TODO: magnitude aliases:
   - Pressure: stress
   - Energy: work, heat
