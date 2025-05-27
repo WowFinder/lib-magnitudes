@@ -13,6 +13,7 @@ const ElectricChargeUnit = {
     C: 'C',
     As: 'As',
     Ah: 'Ah',
+    e: 'e', // elementary charge
 } as const;
 Object.freeze(ElectricChargeUnit);
 
@@ -22,6 +23,7 @@ const electricChargeConversionFactors: ConversionFactors<
     C: 1,
     As: 1,
     Ah: timeUnitConversionFactors.h,
+    e: 1.602176634e-19, // elementary charge in coulombs
 } as const;
 Object.freeze(electricChargeConversionFactors);
 
