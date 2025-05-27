@@ -1,4 +1,4 @@
-import { ElectricCharge } from "../Magnitude/Derived/ElectricCharge";
+import { ElectricCharge } from '../Magnitude/Derived/ElectricCharge';
 
 /** Elementary charge (absolute charge of a single proton or electron) */
 const e = new ElectricCharge({
