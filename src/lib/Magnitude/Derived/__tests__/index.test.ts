@@ -28,6 +28,12 @@ describe('Derived Magnitudes', () => {
             'Power',
             'PowerUnit',
             'powerConversionFactors',
+            // From Surface.ts
+            'Area',
+            'AreaUnit',
+            'Surface',
+            'areaUnitConversionFactors',
+            'assertIsAreaUnitKey',
             // From Velocity.ts
             'Speed',
             'Velocity',
