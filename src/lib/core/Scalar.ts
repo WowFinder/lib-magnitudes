@@ -91,9 +91,23 @@ class BaseScalar<T extends StrictEnum<T>> {
     }
 }
 
+type ScalarConstructor<T extends StrictEnum<T>, S extends Scalar<T>> = (
+    builder: ScalarBuilder<T>,
+) => S;
 abstract class Scalar<T extends StrictEnum<T>> extends BaseScalar<T> {
     abstract convert(to: keyof T): Scalar<T>;
+    static add<T extends StrictEnum<T>, S extends Scalar<T>>(
+        builder: ScalarConstructor<T, S>,
+        targetUnit: keyof T,
+        ...magnitudes: Scalar<T>[]
+    ): S {
+        const value = magnitudes.reduce((sum, magnitude) => {
+            const converted = magnitude.convert(targetUnit);
+            return sum + converted.value;
+        }, 0);
+        return builder({ value, unit: targetUnit });
+    }
 }
 
-export type { ScalarBuilder };
+export type { ScalarBuilder, ScalarConstructor };
 export { BaseScalar, Scalar };

@@ -5,27 +5,34 @@ import {
     sampleTimeUnitParser,
 } from './SampleTime.mocks';
 import { milliPrefix } from './common.mocks';
+import { type ScalarBuilder } from '../Scalar';
+
+const sampleCtor = ({
+    value,
+    unit,
+}: ScalarBuilder<typeof SampleTimeUnits>): SampleTimeImpl =>
+    new SampleTimeImpl({ value, unit });
 
 describe('Scalar', () => {
     it('should create a scalar from a builder', () => {
-        const scalar = new SampleTimeImpl({ value: 1, unit: 's' });
+        const scalar = sampleCtor({ value: 1, unit: 's' });
         expect(scalar).toBeDefined();
     });
 
     it('should convert between units', () => {
-        const scalar = new SampleTimeImpl({ value: 1, unit: 's' });
+        const scalar = sampleCtor({ value: 1, unit: 's' });
         const converted = scalar.convert('m');
         expect(converted).toBeDefined();
         expect(converted.unit).toBe(SampleTimeUnits.m);
         expect(converted.value).toBeCloseTo(1.0 / 60);
-        const minuteScalar = new SampleTimeImpl({ value: 1, unit: 'm' });
+        const minuteScalar = sampleCtor({ value: 1, unit: 'm' });
         const minuteAsSeconds = minuteScalar.convert('s');
         expect(minuteAsSeconds).toBeDefined();
         expect(minuteAsSeconds.unit).toBe(SampleTimeUnits.s);
         expect(minuteAsSeconds.value).toBeCloseTo(60);
     });
     it('should stringify correctly', () => {
-        const scalar = new SampleTimeImpl({ value: 0.1, unit: 's' });
+        const scalar = sampleCtor({ value: 0.1, unit: 's' });
         expect(scalar.toRawString()).toBe('0.1 s');
         expect(scalar.toPrefixedString(1)).toBe('1e+2 ms');
         expect(scalar.toPrefixedString(2, milliPrefix)).toBe('1.0e+2 ms');
@@ -60,6 +67,32 @@ describe('Scalar', () => {
                 sampleTimeUnitParser,
             );
             expect(parsed).toBeUndefined();
+        });
+    });
+    describe('add', () => {
+        it('should add multiple scalars in the same unit', () => {
+            const sum = SampleTimeImpl.add(
+                sampleCtor,
+                SampleTimeUnits.s,
+                sampleCtor({ value: 35, unit: SampleTimeUnits.s }),
+                sampleCtor({ value: 60, unit: SampleTimeUnits.s }),
+                sampleCtor({ value: 85, unit: SampleTimeUnits.s }),
+            );
+            expect(sum).toBeDefined();
+            expect(sum.value).toBe(180);
+            expect(sum.unit).toBe(SampleTimeUnits.s);
+        });
+        it('should add multiple scalars in different units', () => {
+            const sum = SampleTimeImpl.add(
+                sampleCtor,
+                SampleTimeUnits.h,
+                sampleCtor({ value: 3600, unit: SampleTimeUnits.s }),
+                sampleCtor({ value: 60, unit: SampleTimeUnits.m }),
+                sampleCtor({ value: 1, unit: SampleTimeUnits.h }),
+            );
+            expect(sum).toBeDefined();
+            expect(sum.value).toBe(3);
+            expect(sum.unit).toBe(SampleTimeUnits.h);
         });
     });
 });

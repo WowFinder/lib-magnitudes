@@ -1,4 +1,4 @@
-import { BaseScalar, type Scalar, type ScalarBuilder } from './Scalar';
+import { type BaseScalar, type Scalar, type ScalarBuilder } from './Scalar';
 import { type Vector3DBuilder, type Vector3D } from './Vector3D';
 import { type StrictEnum } from './helpers';
 
@@ -47,24 +47,10 @@ function makeVectorConversions<
     };
 }
 
-// TODO: Refactor as static method on Scalar
-function add<T extends StrictEnum<T>, R extends Scalar<T> = Scalar<T>>(
-    conversion: ScalarConversion<T, R>,
-    unit: keyof T,
-    ...magnitudes: BaseScalar<T>[]
-): R {
-    const value = magnitudes.reduce((sum, magnitude) => {
-        const converted = conversion(magnitude, unit);
-        return sum + converted.value;
-    }, 0);
-    return conversion(new BaseScalar({ value, unit }), unit);
-}
-
 export {
     type ScalarConversion,
     type VectorConversion,
     type ConversionFactors,
     makeScalarConversions,
     makeVectorConversions,
-    add,
 };
