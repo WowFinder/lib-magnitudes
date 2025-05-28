@@ -1,5 +1,9 @@
 import { type BaseScalar, type Scalar, type ScalarBuilder } from './Scalar';
-import { type Vector3DBuilder, type Vector3D } from './Vector3D';
+import {
+    type Vector3DBuilder,
+    type Vector3D,
+    type BaseVector3D,
+} from './Vector3D';
 import { type StrictEnum } from './helpers';
 
 type ScalarConversion<
@@ -10,7 +14,7 @@ type ScalarConversion<
 type VectorConversion<
     T extends StrictEnum<T>,
     R extends Vector3D<T> = Vector3D<T>,
-> = (vector: Vector3D<T>, to: keyof T) => R;
+> = (vector: BaseVector3D<T>, to: keyof T) => R;
 
 type ConversionFactors<T extends StrictEnum<T>> = Readonly<
     Record<keyof T, number>
@@ -38,7 +42,7 @@ function makeVectorConversions<
     factors: ConversionFactors<T>,
     constructor: (builder: Vector3DBuilder<T>) => R,
 ): VectorConversion<T, R> {
-    return (vector: Vector3D<T>, to: keyof T): R => {
+    return (vector: BaseVector3D<T>, to: keyof T): R => {
         const factor = factors[vector.unit] / factors[to];
         const x = vector.x * factor;
         const y = vector.y * factor;
