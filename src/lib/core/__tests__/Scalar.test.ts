@@ -12,24 +12,24 @@ const timeUnitParser = unitParser(TimeUnit);
 
 describe('Scalar', () => {
     it('should create a scalar from a builder', () => {
-        const scalar = sampleCtor({ value: 1, unit: 's' });
+        const scalar = sampleCtor({ value: 1, unit: TimeUnit.s });
         expect(scalar).toBeDefined();
     });
 
     it('should convert between units', () => {
-        const scalar = sampleCtor({ value: 1, unit: 's' });
-        const converted = scalar.convert('m');
+        const scalar = sampleCtor({ value: 1, unit: TimeUnit.s });
+        const converted = scalar.convert(TimeUnit.m);
         expect(converted).toBeDefined();
         expect(converted.unit).toBe(TimeUnit.m);
         expect(converted.value).toBeCloseTo(1.0 / 60);
-        const minuteScalar = sampleCtor({ value: 1, unit: 'm' });
-        const minuteAsSeconds = minuteScalar.convert('s');
+        const minuteScalar = sampleCtor({ value: 1, unit: TimeUnit.m });
+        const minuteAsSeconds = minuteScalar.convert(TimeUnit.s);
         expect(minuteAsSeconds).toBeDefined();
         expect(minuteAsSeconds.unit).toBe(TimeUnit.s);
         expect(minuteAsSeconds.value).toBeCloseTo(60);
     });
     it('should stringify correctly', () => {
-        const scalar = sampleCtor({ value: 0.1, unit: 's' });
+        const scalar = sampleCtor({ value: 0.1, unit: TimeUnit.s });
         expect(scalar.toRawString()).toBe('0.1 s');
         expect(scalar.toPrefixedString(1)).toBe('1e+2 ms');
         expect(scalar.toPrefixedString(2, milliPrefix)).toBe('1.0e+2 ms');
@@ -40,13 +40,13 @@ describe('Scalar', () => {
             const parsed = Time.parse('1.5 m', timeUnitParser);
             expect(parsed).toBeDefined();
             expect(parsed?.value).toBe(1.5);
-            expect(parsed?.unit).toBe('m');
+            expect(parsed?.unit).toBe(TimeUnit.m);
         });
         it('should parse a valid prefixed string', () => {
             const parsed = Time.parse('1500 ms', timeUnitParser);
             expect(parsed).toBeDefined();
             expect(parsed?.value).toBe(1.5);
-            expect(parsed?.unit).toBe('s');
+            expect(parsed?.unit).toBe(TimeUnit.s);
         });
         it('should fail to parse an invalid string', () => {
             const parsed = Time.tryParse('invalid input', timeUnitParser);
