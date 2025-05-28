@@ -54,7 +54,7 @@ class ScalarForce extends Scalar<typeof ForceUnit> {
 }
 
 class Force extends Vector3D<typeof ForceUnit> {
-    static #converter: VectorConversion<typeof ForceUnit, Force> =
+    static readonly #converter: VectorConversion<typeof ForceUnit, Force> =
         makeVectorConversions<typeof ForceUnit, Force>(
             forceConversionFactors,
             ({ x, y, z, unit }) => new Force({ x, y, z, unit }),
