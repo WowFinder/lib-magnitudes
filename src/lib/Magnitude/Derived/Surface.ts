@@ -33,7 +33,7 @@ const AreaUnit = Object.keys(LengthUnit).reduce(
         const key = `${l}²` as AreaUnitKey;
         assertIsAreaUnitKey(key);
         acc[key] = key;
-        converstionFactorsBuilder[key] = Math.pow(lengthFactor(l), 2);
+        conversionFactorsBuilder[key] = Math.pow(lengthFactor(l), 2);
         return acc;
     },
     {} as Record<AreaUnitKey, AreaUnitKey>,
@@ -41,7 +41,7 @@ const AreaUnit = Object.keys(LengthUnit).reduce(
 Object.freeze(AreaUnit);
 
 const areaUnitConversionFactors =
-    converstionFactorsBuilder as ConversionFactors<AreaUnitEnum>;
+    conversionFactorsBuilder as ConversionFactors<AreaUnitEnum>;
 Object.freeze(areaUnitConversionFactors);
 
 class Area extends Scalar<AreaUnitEnum> {
