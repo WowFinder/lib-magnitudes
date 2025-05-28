@@ -7,10 +7,10 @@ import { describe, it, expect } from 'vitest';
 import {
     timeUnitConversionFactors,
     Time,
-    type TimeUnit,
+    TimeUnit,
     lengthConversionFactors,
     Position,
-    type LengthUnit,
+    LengthUnit,
 } from '../../Magnitude/Base';
 
 function getScalarConverters(): ScalarConversion<typeof TimeUnit, Time> {
@@ -24,11 +24,11 @@ describe('Conversion', () => {
     describe('makeScalarConversions', () => {
         it('should create a conversion function', () => {
             const convert = getScalarConverters();
-            const sampleTime = new Time({ value: 30, unit: 's' });
-            const convertedToMinutes = convert(sampleTime, 'm');
+            const sampleTime = new Time({ value: 30, unit: TimeUnit.s });
+            const convertedToMinutes = convert(sampleTime, TimeUnit.m);
             expect(convertedToMinutes).toBeDefined();
             expect(convertedToMinutes.value).toBeCloseTo(0.5, 4);
-            expect(convertedToMinutes.unit).toBe('m');
+            expect(convertedToMinutes.unit).toBe(TimeUnit.m);
         });
     });
     describe('makeVectorConversions', () => {
@@ -41,14 +41,14 @@ describe('Conversion', () => {
                 x: 1,
                 y: 2,
                 z: 3,
-                unit: 'm',
+                unit: LengthUnit.m,
             });
-            const convertedToYards = convert(samplePosition, 'yd');
+            const convertedToYards = convert(samplePosition, LengthUnit.yd);
             expect(convertedToYards).toBeDefined();
             expect(convertedToYards.x).toBeCloseTo(1.09361);
             expect(convertedToYards.y).toBeCloseTo(2.18722);
             expect(convertedToYards.z).toBeCloseTo(3.28084);
-            expect(convertedToYards.unit).toBe('yd');
+            expect(convertedToYards.unit).toBe(LengthUnit.yd);
         });
     });
 });
