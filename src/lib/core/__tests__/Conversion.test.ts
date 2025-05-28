@@ -5,23 +5,18 @@ import {
 } from '../Conversion';
 import { describe, it, expect } from 'vitest';
 import {
-    sampleTimeConversionFactors,
-    SampleTimeImpl,
-    type SampleTimeUnits,
-} from './SampleTime.mocks';
-import {
-    sampleLengthConversionFactors,
-    SamplePositionImpl,
-    type SampleLengthUnits,
-} from './SamplePosition.mocks';
+    timeUnitConversionFactors,
+    Time,
+    type TimeUnit,
+    lengthConversionFactors,
+    Position,
+    type LengthUnit,
+} from '../../Magnitude/Base';
 
-function getScalarConverters(): ScalarConversion<
-    typeof SampleTimeUnits,
-    SampleTimeImpl
-> {
-    return makeScalarConversions<typeof SampleTimeUnits, SampleTimeImpl>(
-        sampleTimeConversionFactors,
-        ({ value, unit }) => new SampleTimeImpl({ value, unit }),
+function getScalarConverters(): ScalarConversion<typeof TimeUnit, Time> {
+    return makeScalarConversions<typeof TimeUnit, Time>(
+        timeUnitConversionFactors,
+        ({ value, unit }) => new Time({ value, unit }),
     );
 }
 
@@ -29,7 +24,7 @@ describe('Conversion', () => {
     describe('makeScalarConversions', () => {
         it('should create a conversion function', () => {
             const convert = getScalarConverters();
-            const sampleTime = new SampleTimeImpl({ value: 30, unit: 's' });
+            const sampleTime = new Time({ value: 30, unit: 's' });
             const convertedToMinutes = convert(sampleTime, 'm');
             expect(convertedToMinutes).toBeDefined();
             expect(convertedToMinutes.value).toBeCloseTo(0.5, 4);
@@ -38,15 +33,11 @@ describe('Conversion', () => {
     });
     describe('makeVectorConversions', () => {
         it('should create a conversion function', () => {
-            const convert = makeVectorConversions<
-                typeof SampleLengthUnits,
-                SamplePositionImpl
-            >(
-                sampleLengthConversionFactors,
-                ({ x, y, z, unit }) =>
-                    new SamplePositionImpl({ x, y, z, unit }),
+            const convert = makeVectorConversions<typeof LengthUnit, Position>(
+                lengthConversionFactors,
+                ({ x, y, z, unit }) => new Position({ x, y, z, unit }),
             );
-            const samplePosition = new SamplePositionImpl({
+            const samplePosition = new Position({
                 x: 1,
                 y: 2,
                 z: 3,
