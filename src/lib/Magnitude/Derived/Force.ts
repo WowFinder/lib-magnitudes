@@ -32,11 +32,13 @@ const forceConversionFactors: ConversionFactors<typeof ForceUnit> = {
 Object.freeze(forceConversionFactors);
 
 class ScalarForce extends Scalar<typeof ForceUnit> {
-    static readonly #converter: ScalarConversion<typeof ForceUnit, ScalarForce> =
-        makeScalarConversions<typeof ForceUnit, ScalarForce>(
-            forceConversionFactors,
-            ({ value, unit }) => new ScalarForce({ value, unit }),
-        );
+    static readonly #converter: ScalarConversion<
+        typeof ForceUnit,
+        ScalarForce
+    > = makeScalarConversions<typeof ForceUnit, ScalarForce>(
+        forceConversionFactors,
+        ({ value, unit }) => new ScalarForce({ value, unit }),
+    );
     constructor({ value, unit }: ScalarBuilder<typeof ForceUnit>) {
         super({ value, unit });
     }
