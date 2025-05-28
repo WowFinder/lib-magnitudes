@@ -23,7 +23,7 @@ function assertIsAreaUnitKey(key: string): asserts key is AreaUnitKey {
 
 type AreaUnitEnum = KeyAsValueObject<AreaUnitKey>;
 
-const converstionFactorsBuilder = {} as Record<AreaUnitKey, number>;
+const conversionFactorsBuilder = {} as Record<AreaUnitKey, number>;
 function lengthFactor(key: string): number {
     return lengthConversionFactors[key as keyof typeof lengthConversionFactors];
 }
