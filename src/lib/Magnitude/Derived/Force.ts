@@ -12,10 +12,9 @@ import {
     makeVectorConversions,
     UnitPrefixes,
 } from '../../core';
-import { Mass } from '../Base';
+import { Mass, massConversionFactors } from '../Base';
 import { Acceleration } from './Acceleration';
 import { g_0 } from '../../constants';
-import { massConversionFactors } from '../Base';
 
 const ForceUnit = {
     N: 'N',
@@ -33,7 +32,7 @@ const forceConversionFactors: ConversionFactors<typeof ForceUnit> = {
 Object.freeze(forceConversionFactors);
 
 class ScalarForce extends Scalar<typeof ForceUnit> {
-    static #converter: ScalarConversion<typeof ForceUnit, ScalarForce> =
+    static readonly #converter: ScalarConversion<typeof ForceUnit, ScalarForce> =
         makeScalarConversions<typeof ForceUnit, ScalarForce>(
             forceConversionFactors,
             ({ value, unit }) => new ScalarForce({ value, unit }),
