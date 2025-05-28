@@ -12,6 +12,7 @@ describe('math index', () => {
             'powerTimesTime',
             'timeTimesPower',
             'forceTimesDistance',
+            'distanceTimesForce',
             // From Power.ts
             'energyPerTime',
             'electricCurrentTimesVoltage',

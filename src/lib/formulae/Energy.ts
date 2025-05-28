@@ -6,7 +6,7 @@ import {
     LengthUnit,
     type Power,
     PowerUnit,
-    ScalarForce,
+    type ScalarForce,
     type Time,
     TimeUnit,
 } from '../Magnitude';
@@ -28,7 +28,7 @@ function timeTimesPower(time: Time, power: Power): Energy {
 function forceTimesDistance(force: ScalarForce, distance: Length): Energy;
 // TODO (Requires dot-product for vectors):
 // function forceTimesDistance(force: Force, distance: Position): Energy;
-// Combinations ScalarForce x Position and Force x Length; 
+// Combinations ScalarForce x Position and Force x Length;
 function forceTimesDistance(force: ScalarForce, distance: Length): Energy {
     const forceInNewtons = force.convert(ForceUnit.N).value;
     const distanceInMeters = distance.convert(LengthUnit.m).value;
@@ -38,5 +38,14 @@ function forceTimesDistance(force: ScalarForce, distance: Length): Energy {
         unit: EnergyUnit.J,
     });
 }
+function distanceTimesForce(distance: Length, force: ScalarForce): Energy;
+function distanceTimesForce(distance: Length, force: ScalarForce): Energy {
+    return forceTimesDistance(force, distance);
+}
 
-export { powerTimesTime, timeTimesPower, forceTimesDistance };
+export {
+    powerTimesTime,
+    timeTimesPower,
+    forceTimesDistance,
+    distanceTimesForce,
+};
