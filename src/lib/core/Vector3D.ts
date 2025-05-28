@@ -1,15 +1,15 @@
-import { type KeyAsValueObject, defaultPrecision } from './helpers';
+import { type StrictEnum, defaultPrecision } from './helpers';
 import { bestPrefixByValue, type PrefixSpec } from './Prefix';
 import { type ScalarBuilder } from './Scalar';
 
-type Vector3DBuilder<T extends KeyAsValueObject<keyof T & string>> = {
+type Vector3DBuilder<T extends StrictEnum<T>> = {
     x: number;
     y: number;
     z: number;
     unit: keyof T;
 };
 
-class BaseVector3D<T extends KeyAsValueObject<keyof T & string>> {
+class BaseVector3D<T extends StrictEnum<T>> {
     readonly #x: number;
     readonly #y: number;
     readonly #z: number;
@@ -72,9 +72,7 @@ class BaseVector3D<T extends KeyAsValueObject<keyof T & string>> {
     }
 }
 
-abstract class Vector3D<
-    T extends KeyAsValueObject<keyof T & string>,
-> extends BaseVector3D<T> {
+abstract class Vector3D<T extends StrictEnum<T>> extends BaseVector3D<T> {
     abstract convert(to: keyof T): Vector3D<T>;
 }
 

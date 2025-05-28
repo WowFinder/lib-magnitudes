@@ -4,11 +4,7 @@ import {
     bestPrefixByValue,
     prefixMatchers,
 } from './Prefix';
-import {
-    defaultPrecision,
-    type KeyAsValueObject,
-    type Parser,
-} from './helpers';
+import { defaultPrecision, type StrictEnum, type Parser } from './helpers';
 
 const prefixedScalarMatcher = new RegExp(
     `^([+-]?\\d+(?:\\.\\d*)?(?:[eE][+-]?\\d+)?)\\s*${prefixMatchers.capturingOptional}(\\p{L}*)$`,
@@ -18,12 +14,12 @@ const prefixedScalarMatcher = new RegExp(
 const unprefixedScalarMatcher =
     /^([+-]?\d+(?:\.\d*)?(?:[eE][+-]?\d+)?)\s*(\p{L}*)$/u;
 
-type ScalarBuilder<T extends KeyAsValueObject<keyof T & string>> = {
+type ScalarBuilder<T extends StrictEnum<T>> = {
     readonly value: number;
     readonly unit: keyof T;
 };
 
-class BaseScalar<T extends KeyAsValueObject<keyof T & string>> {
+class BaseScalar<T extends StrictEnum<T>> {
     readonly #value: number;
     readonly #unit: keyof T;
 
@@ -54,7 +50,7 @@ class BaseScalar<T extends KeyAsValueObject<keyof T & string>> {
         return this.toPrefixedString(defaultPrecision);
     }
 
-    static parse<T extends KeyAsValueObject<keyof T & string>>(
+    static parse<T extends StrictEnum<T>>(
         input: string,
         unitParser: Parser<keyof T>,
     ): BaseScalar<T> {
@@ -83,7 +79,7 @@ class BaseScalar<T extends KeyAsValueObject<keyof T & string>> {
         throw err ?? new Error(`Invalid scalar format: ${input}`);
     }
 
-    static tryParse<T extends KeyAsValueObject<keyof T & string>>(
+    static tryParse<T extends StrictEnum<T>>(
         input: string,
         unitParser: Parser<keyof T>,
     ): BaseScalar<T> | undefined {
@@ -95,9 +91,7 @@ class BaseScalar<T extends KeyAsValueObject<keyof T & string>> {
     }
 }
 
-abstract class Scalar<
-    T extends KeyAsValueObject<keyof T & string>,
-> extends BaseScalar<T> {
+abstract class Scalar<T extends StrictEnum<T>> extends BaseScalar<T> {
     abstract convert(to: keyof T): Scalar<T>;
 }
 
