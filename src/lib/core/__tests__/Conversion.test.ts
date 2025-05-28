@@ -10,9 +10,9 @@ import {
     type SampleTimeUnits,
 } from './SampleTime.mocks';
 import {
-    samplePositionConversionFactors,
+    sampleLengthConversionFactors,
     SamplePositionImpl,
-    type SamplePositionUnits,
+    type SampleLengthUnits,
 } from './SamplePosition.mocks';
 
 function getScalarConverters(): ScalarConversion<
@@ -39,10 +39,10 @@ describe('Conversion', () => {
     describe('makeVectorConversions', () => {
         it('should create a conversion function', () => {
             const convert = makeVectorConversions<
-                typeof SamplePositionUnits,
+                typeof SampleLengthUnits,
                 SamplePositionImpl
             >(
-                samplePositionConversionFactors,
+                sampleLengthConversionFactors,
                 ({ x, y, z, unit }) =>
                     new SamplePositionImpl({ x, y, z, unit }),
             );
