@@ -3,6 +3,7 @@ export * from './ElectricCharge';
 export * from './Energy';
 export * from './Force';
 export * from './Power';
+export * from './Surface';
 export * from './Velocity';
 export * from './Voltage';
 /* TODO: missing SI derived units:
@@ -25,7 +26,6 @@ export * from './Voltage';
  */
 /* TODO: magnitudes without named units:
   - LuminousEfficacy (lm/W) (necessary to define K_cd constant)
-  - Area (scalar) / Surface (vectorial) (m²)
   - Volume (m³)
   - Density / VolumetricMassDensity (kg/m³)
  */
