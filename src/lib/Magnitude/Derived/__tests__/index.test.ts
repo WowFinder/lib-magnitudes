@@ -5,25 +5,36 @@ import { expectExportsExactly } from '../../../../__tests__/utils';
 describe('Derived Magnitudes', () => {
     it('should export all expected members', () => {
         expectExportsExactly(Derived, [
-            'Acceleration',
-            'ElectricCharge',
-            'ElectricChargeUnit',
-            'electricChargeConversionFactors',
-            'Energy',
-            'EnergyUnit',
-            'energyConversionFactors',
-            'Power',
-            'PowerUnit',
-            'powerConversionFactors',
+            // From Acceleration.ts
             'ScalarAcceleration',
+            'Acceleration',
             'AccelerationUnit',
             'accelerationUnitConversionFactors',
             'assertIsAccelerationUnitKey',
+            // From ElectricCharge.ts
+            'ElectricCharge',
+            'ElectricChargeUnit',
+            'electricChargeConversionFactors',
+            // From Energy.ts
+            'Energy',
+            'EnergyUnit',
+            'energyConversionFactors',
+            // From Force.ts
+            'ScalarForce',
+            'Force',
+            'ForceUnit',
+            'forceConversionFactors',
+            // From Power.ts
+            'Power',
+            'PowerUnit',
+            'powerConversionFactors',
+            // From Velocity.ts
             'Speed',
+            'Velocity',
             'SpeedUnit',
             'speedUnitConversionFactors',
             'assertIsSpeedUnitKey',
-            'Velocity',
+            // From Voltage.ts
             'Voltage',
             'VoltageUnit',
             'voltageConversionFactors',
