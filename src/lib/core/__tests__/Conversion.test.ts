@@ -1,7 +1,6 @@
 import {
     makeScalarConversions,
     makeVectorConversions,
-    add,
     type ScalarConversion,
 } from '../Conversion';
 import { describe, it, expect } from 'vitest';
@@ -11,9 +10,9 @@ import {
     type SampleTimeUnits,
 } from './SampleTime.mocks';
 import {
-    samplePositionConversionFactors,
+    sampleLengthConversionFactors,
     SamplePositionImpl,
-    type SamplePositionUnits,
+    type SampleLengthUnits,
 } from './SamplePosition.mocks';
 
 function getScalarConverters(): ScalarConversion<
@@ -40,10 +39,10 @@ describe('Conversion', () => {
     describe('makeVectorConversions', () => {
         it('should create a conversion function', () => {
             const convert = makeVectorConversions<
-                typeof SamplePositionUnits,
+                typeof SampleLengthUnits,
                 SamplePositionImpl
             >(
-                samplePositionConversionFactors,
+                sampleLengthConversionFactors,
                 ({ x, y, z, unit }) =>
                     new SamplePositionImpl({ x, y, z, unit }),
             );
@@ -59,33 +58,6 @@ describe('Conversion', () => {
             expect(convertedToYards.y).toBeCloseTo(2.18722);
             expect(convertedToYards.z).toBeCloseTo(3.28084);
             expect(convertedToYards.unit).toBe('yd');
-        });
-    });
-    describe('add', () => {
-        it('should add multiple magnitudes in the same unit', () => {
-            const convert = getScalarConverters();
-            const sum = add(
-                convert,
-                's',
-                new SampleTimeImpl({ value: 30, unit: 's' }),
-                new SampleTimeImpl({ value: 90, unit: 's' }),
-            );
-            expect(sum).toBeDefined();
-            expect(sum.value).toBe(120);
-            expect(sum.unit).toBe('s');
-        });
-
-        it('should add magnitudes in different units', () => {
-            const convert = getScalarConverters();
-            const sum = add(
-                convert,
-                'm',
-                new SampleTimeImpl({ value: 1, unit: 'm' }),
-                new SampleTimeImpl({ value: 60, unit: 's' }),
-            );
-            expect(sum).toBeDefined();
-            expect(sum.value).toBeCloseTo(2, 4);
-            expect(sum.unit).toBe('m');
         });
     });
 });

@@ -2,7 +2,7 @@
 
 type Parser<T> = (unit: string) => T;
 
-type KeyAsValueObject<T extends string> = {
+type KeyAsValueObject<T extends string | symbol | number> = {
     [K in T]: K;
 };
 
@@ -15,7 +15,7 @@ function assertIsValidKey<T extends string>(
     }
 }
 
-type StrictEnum<T> = KeyAsValueObject<keyof T & string>;
+type StrictEnum<T> = KeyAsValueObject<keyof T>;
 
 const defaultPrecision = 3;
 

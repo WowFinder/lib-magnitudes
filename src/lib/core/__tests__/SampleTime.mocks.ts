@@ -4,6 +4,7 @@ import { Scalar } from '../Scalar';
 const SampleTimeUnits = {
     s: 's',
     m: 'm',
+    h: 'h',
 } as const;
 
 const sampleTimeUnitParser = unitParser(SampleTimeUnits);
@@ -18,6 +19,7 @@ const sampleTimeConversionFactors: {
 } = {
     s: 1,
     m: 60,
+    h: 3600,
 };
 
 class SampleTimeImpl extends Scalar<typeof SampleTimeUnits> {

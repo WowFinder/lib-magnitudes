@@ -8,7 +8,6 @@ describe('core', () => {
             // from Conversion.ts
             'makeScalarConversions',
             'makeVectorConversions',
-            'add',
 
             // from Dimensionality.ts
             'fillDimensionality',
