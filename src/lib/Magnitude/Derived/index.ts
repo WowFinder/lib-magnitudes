@@ -1,6 +1,7 @@
 export * from './Acceleration';
 export * from './ElectricCharge';
 export * from './Energy';
+export * from './Force';
 export * from './Power';
 export * from './Velocity';
 export * from './Voltage';
@@ -8,7 +9,6 @@ export * from './Voltage';
   - PlaneAngle (radian)
   - SolidAngle (steradian)
   - Frequency (hertz)
-  - Force (newton)
   - Pressure (pascal)
   - Capacitance (farad)
   - ElectricalResistance (ohm)

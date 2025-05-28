@@ -1,15 +1,12 @@
 import prettier from 'eslint-plugin-prettier';
 import typescriptEslint from '@typescript-eslint/eslint-plugin';
 import misc from 'eslint-plugin-misc';
-import istanbul from 'eslint-plugin-istanbul';
 import stylisticJs from '@stylistic/eslint-plugin-js';
-import deprecationPlugin from 'eslint-plugin-deprecation';
 import globals from 'globals';
 import tsParser from '@typescript-eslint/parser';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import js from '@eslint/js';
-import { fixupPluginRules } from '@eslint/compat';
 import { FlatCompat } from '@eslint/eslintrc';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -42,7 +39,6 @@ export default [
         plugins: {
             prettier,
             '@typescript-eslint': typescriptEslint,
-            ['deprecation']: fixupPluginRules(deprecationPlugin),
             '@stylistic/js': stylisticJs,
             misc,
         },
@@ -75,7 +71,7 @@ export default [
                     skipComments: true,
                 },
             ],
-            'deprecation/deprecation': 'warn',
+            '@typescript-eslint/no-deprecated': 'warn',
             quotes: [
                 'error',
                 'single',
@@ -139,5 +135,4 @@ export default [
         },
     },
 ];
-
 
