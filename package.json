@@ -36,7 +36,7 @@
         "prepare": "yarn build"
     },
     "devDependencies": {
-        "@stylistic/eslint-plugin-js": "^4.2.0",
+        "@stylistic/eslint-plugin-js": "^4.4.0",
         "@trivago/prettier-plugin-sort-imports": "^5.2.2",
         "@tsconfig/recommended": "^1.0.8",
         "@types/jest": "^29.5.14",
