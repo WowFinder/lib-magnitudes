@@ -44,6 +44,11 @@ describe('Derived Magnitudes', () => {
             'Voltage',
             'VoltageUnit',
             'voltageConversionFactors',
+            // From Volume.ts
+            'Volume',
+            'VolumeUnit',
+            'volumeUnitConversionFactors',
+            'assertIsVolumeUnitKey',
         ]);
     });
 });

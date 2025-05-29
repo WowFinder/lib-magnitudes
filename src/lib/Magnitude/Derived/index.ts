@@ -6,6 +6,7 @@ export * from './Power';
 export * from './Surface';
 export * from './Velocity';
 export * from './Voltage';
+export * from './Volume';
 /* TODO: missing SI derived units:
   - PlaneAngle (radian)
   - SolidAngle (steradian)
@@ -26,7 +27,6 @@ export * from './Voltage';
  */
 /* TODO: magnitudes without named units:
   - LuminousEfficacy (lm/W) (necessary to define K_cd constant)
-  - Volume (m³)
   - Density / VolumetricMassDensity (kg/m³)
  */
 /* TODO: magnitude aliases:
