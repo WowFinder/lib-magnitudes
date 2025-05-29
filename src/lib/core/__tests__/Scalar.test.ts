@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest';
 
 import { Time, TimeUnit } from '../../Magnitude/Base';
-import { milliPrefix } from './common.mocks';
 import { type ScalarBuilder } from '../Scalar';
 import { unitParser } from '../helpers';
+import { UnitPrefixes } from '../Prefix';
 
 const sampleCtor = ({ value, unit }: ScalarBuilder<typeof TimeUnit>): Time =>
     new Time({ value, unit });
@@ -32,7 +32,7 @@ describe('Scalar', () => {
         const scalar = sampleCtor({ value: 0.1, unit: TimeUnit.s });
         expect(scalar.toRawString()).toBe('0.1 s');
         expect(scalar.toPrefixedString(1)).toBe('1e+2 ms');
-        expect(scalar.toPrefixedString(2, milliPrefix)).toBe('1.0e+2 ms');
+        expect(scalar.toPrefixedString(2, UnitPrefixes['m'])).toBe('1.0e+2 ms');
         expect(scalar.toString()).toBe('100 ms');
     });
     describe('parsing', () => {

@@ -5,7 +5,9 @@ import {
     makeVectorConversions,
     productDimensionality,
     Scalar,
+    type ScalarBuilder,
     Vector3D,
+    type Vector3DBuilder,
 } from '../../core';
 import { type KeyAsValueObject } from '../../core/helpers';
 import { Length, lengthConversionFactors, LengthUnit } from '../Base/Length';
@@ -44,13 +46,14 @@ const areaUnitConversionFactors =
     conversionFactorsBuilder as ConversionFactors<AreaUnitEnum>;
 Object.freeze(areaUnitConversionFactors);
 
+type AreaBuilder = ScalarBuilder<typeof AreaUnit>;
 class Area extends Scalar<AreaUnitEnum> {
     static readonly #convert = makeScalarConversions<AreaUnitEnum, Area>(
         areaUnitConversionFactors,
         ({ value, unit }) => new Area({ value, unit }),
     );
 
-    constructor({ value, unit }: { value: number; unit: AreaUnitKey }) {
+    constructor({ value, unit }: AreaBuilder) {
         super({ value, unit });
     }
 
@@ -64,23 +67,14 @@ class Area extends Scalar<AreaUnitEnum> {
     }
 }
 
+type SurfaceBuilder = Vector3DBuilder<typeof AreaUnit>;
 class Surface extends Vector3D<typeof AreaUnit> {
     static readonly #convert = makeVectorConversions<typeof AreaUnit, Surface>(
         areaUnitConversionFactors,
         ({ x, y, z, unit }) => new Surface({ x, y, z, unit }),
     );
 
-    constructor({
-        x,
-        y,
-        z,
-        unit,
-    }: {
-        x: number;
-        y: number;
-        z: number;
-        unit: AreaUnitKey;
-    }) {
+    constructor({ x, y, z, unit }: SurfaceBuilder) {
         super({ x, y, z, unit });
     }
 
@@ -101,4 +95,6 @@ export {
     Surface,
     areaUnitConversionFactors,
     assertIsAreaUnitKey,
+    type SurfaceBuilder,
+    type AreaBuilder,
 };
