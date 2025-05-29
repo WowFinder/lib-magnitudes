@@ -8,6 +8,7 @@ import {
     productDimensionality,
 } from '../../core';
 import { Length, timeUnitConversionFactors } from '../Base';
+import { electricChargeConversionFactors } from './ElectricCharge';
 import { Force } from './Force';
 
 const EnergyUnit = {
@@ -20,7 +21,7 @@ Object.freeze(EnergyUnit);
 const energyConversionFactors: ConversionFactors<typeof EnergyUnit> = {
     J: 1,
     Wh: timeUnitConversionFactors.h,
-    eV: 1.602176634e-19,
+    eV: electricChargeConversionFactors.e,
 } as const;
 Object.freeze(energyConversionFactors);
 

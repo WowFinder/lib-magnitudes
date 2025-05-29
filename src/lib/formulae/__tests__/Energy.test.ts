@@ -1,8 +1,10 @@
 import {
     EnergyUnit,
+    Force,
     ForceUnit,
     Length,
     LengthUnit,
+    Position,
     Power,
     PowerUnit,
     ScalarForce,
@@ -72,6 +74,103 @@ describe('Energy formulae', () => {
             expect(energy2).toBeDefined();
             expect(energy2.value).toBeCloseTo(3579359.383594897, 8);
             expect(energy2.unit).toBe(EnergyUnit.J);
+        });
+        it('should calculate energy correctly for scalar force and position / displacement vector', () => {
+            const distance = new Position({
+                x: 3,
+                y: 4,
+                z: 0,
+                unit: LengthUnit.m,
+            });
+            const force = new ScalarForce({ value: 10, unit: ForceUnit.N });
+            const energy = forceTimesDistance(force, distance);
+            expect(energy).toBeDefined();
+            expect(energy.value).toBe(50);
+            expect(energy.unit).toBe(EnergyUnit.J);
+            const energy2 = distanceTimesForce(distance, force);
+            expect(energy2).toBeDefined();
+            expect(energy2.value).toBe(50);
+            expect(energy2.unit).toBe(EnergyUnit.J);
+        });
+        it('should calculate energy correctly for force vector and scalar length', () => {
+            const distance = new Length({ value: 2, unit: LengthUnit.m });
+            const force = new Force({ x: 0, y: 6, z: 8, unit: ForceUnit.N });
+            const energy = forceTimesDistance(force, distance);
+            expect(energy).toBeDefined();
+            expect(energy.value).toBe(20);
+            expect(energy.unit).toBe(EnergyUnit.J);
+            const energy2 = distanceTimesForce(distance, force);
+            expect(energy2).toBeDefined();
+            expect(energy2.value).toBe(20);
+            expect(energy2.unit).toBe(EnergyUnit.J);
+        });
+        describe('work as dot product of vectors (angle dependant)', () => {
+            it('should calculate energy correctly for parallel force vector and position / displacement vector', () => {
+                const distance = new Position({
+                    x: 3,
+                    y: 4,
+                    z: 0,
+                    unit: LengthUnit.m,
+                });
+                const force = new Force({
+                    x: 6,
+                    y: 8,
+                    z: 0,
+                    unit: ForceUnit.N,
+                });
+                const energy = forceTimesDistance(force, distance);
+                expect(energy).toBeDefined();
+                expect(energy.value).toBe(50);
+                expect(energy.unit).toBe(EnergyUnit.J);
+                const energy2 = distanceTimesForce(distance, force);
+                expect(energy2).toBeDefined();
+                expect(energy2.value).toBe(50);
+                expect(energy2.unit).toBe(EnergyUnit.J);
+            });
+            it('should calculate energy correctly for perpendicular force vector and position / displacement vector', () => {
+                const distance = new Position({
+                    x: 3,
+                    y: 4,
+                    z: 0,
+                    unit: LengthUnit.m,
+                });
+                const force = new Force({
+                    x: -4,
+                    y: 3,
+                    z: 0,
+                    unit: ForceUnit.N,
+                });
+                const energy = forceTimesDistance(force, distance);
+                expect(energy).toBeDefined();
+                expect(energy.value).toBe(0);
+                expect(energy.unit).toBe(EnergyUnit.J);
+                const energy2 = distanceTimesForce(distance, force);
+                expect(energy2).toBeDefined();
+                expect(energy2.value).toBe(0);
+                expect(energy2.unit).toBe(EnergyUnit.J);
+            });
+            it('should calculate energy correctly for force vector and position / displacement vector at an angle', () => {
+                const distance = new Position({
+                    x: 3,
+                    y: 4,
+                    z: 0,
+                    unit: LengthUnit.m,
+                });
+                const force = new Force({
+                    x: 6,
+                    y: 0,
+                    z: -8,
+                    unit: ForceUnit.N,
+                });
+                const energy = forceTimesDistance(force, distance);
+                expect(energy).toBeDefined();
+                expect(energy.value).toBe(18);
+                expect(energy.unit).toBe(EnergyUnit.J);
+                const energy2 = distanceTimesForce(distance, force);
+                expect(energy2).toBeDefined();
+                expect(energy2.value).toBe(18);
+                expect(energy2.unit).toBe(EnergyUnit.J);
+            });
         });
     });
 });
