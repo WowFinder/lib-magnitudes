@@ -2,16 +2,16 @@ import { Vector3D } from '../core';
 import {
     Energy,
     EnergyUnit,
-    type Force,
+    Force,
     ForceUnit,
     Length,
     LengthUnit,
-    type Position,
-    type Power,
+    Position,
     PowerUnit,
     ScalarForce,
-    type Time,
     TimeUnit,
+    type Time,
+    type Power,
 } from '../Magnitude';
 
 function powerTimesTime(power: Power, time: Time): Energy {
@@ -42,40 +42,36 @@ function forceTimesDistance(
 ): Energy {
     const forceInNewtons = force.convert(ForceUnit.N);
     const distanceInMeters = distance.convert(LengthUnit.m);
-    if (forceInNewtons instanceof ScalarForce) {
-        if (distanceInMeters instanceof Length) {
-            return new Energy({
-                value: forceInNewtons.value * distanceInMeters.value,
-                unit: EnergyUnit.J,
-            });
-        } else {
-            return new Energy({
-                value: forceInNewtons.value * distanceInMeters.magnitude.value,
-                unit: EnergyUnit.J,
-            });
-        }
-    } else {
-        if (distanceInMeters instanceof Length) {
-            return new Energy({
-                value: forceInNewtons.magnitude.value * distanceInMeters.value,
-                unit: EnergyUnit.J,
-            });
-        } else {
-            return Vector3D.dotProduct<
-                typeof ForceUnit,
-                typeof LengthUnit,
-                typeof EnergyUnit,
-                Force,
-                Position,
-                Energy
-            >(
-                builder => new Energy(builder),
-                EnergyUnit.J,
-                forceInNewtons,
-                distanceInMeters,
-            );
-        }
+    if (
+        forceInNewtons instanceof Force &&
+        distanceInMeters instanceof Position
+    ) {
+        return Vector3D.dotProduct<
+            typeof ForceUnit,
+            typeof LengthUnit,
+            typeof EnergyUnit,
+            Force,
+            Position,
+            Energy
+        >(
+            builder => new Energy(builder),
+            EnergyUnit.J,
+            forceInNewtons,
+            distanceInMeters,
+        );
     }
+    const forceValue =
+        forceInNewtons instanceof ScalarForce
+            ? forceInNewtons.value
+            : forceInNewtons.magnitude.value;
+    const distanceValue =
+        distanceInMeters instanceof Length
+            ? distanceInMeters.value
+            : distanceInMeters.magnitude.value;
+    return new Energy({
+        value: forceValue * distanceValue,
+        unit: EnergyUnit.J,
+    });
 }
 
 function distanceTimesForce(
