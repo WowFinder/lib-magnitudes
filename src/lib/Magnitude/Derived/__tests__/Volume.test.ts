@@ -29,8 +29,8 @@ describe('Volume', () => {
 
     it('should convert between different volume units', () => {
         const volumeInCubicMeters = new Volume({ value: 1, unit: 'm³' });
-        const volumeInCubicMiles = volumeInCubicMeters.convert('mile³');
-        expect(volumeInCubicMiles.value).toBeCloseTo(3.986e-13, 6);
-        expect(volumeInCubicMiles.unit).toBe('mile³');
+        const volumeInCubicYards = volumeInCubicMeters.convert('yd³');
+        expect(volumeInCubicYards.value).toBeCloseTo(1.3079506, 7);
+        expect(volumeInCubicYards.unit).toBe('yd³');
     });
 });
