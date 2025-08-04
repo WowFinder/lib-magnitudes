@@ -4,7 +4,7 @@ import {
     type Vector3D,
     type BaseVector3D,
 } from './Vector3D';
-import { type StrictEnum } from './helpers';
+import { type StrictEnum } from './StrictEnum';
 
 type ScalarConversion<
     T extends StrictEnum<T>,

@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 
 import { Time, TimeUnit } from '../../Magnitude/Base';
 import { type ScalarBuilder } from '../Scalar';
-import { unitParser } from '../helpers';
+import { unitParser } from '../Parser';
 import { UnitPrefixes } from '../Prefix';
 
 const sampleCtor = ({ value, unit }: ScalarBuilder<typeof TimeUnit>): Time =>

@@ -9,7 +9,7 @@ import {
     Vector3D,
     type Vector3DBuilder,
 } from '../../core';
-import { assertIsValidKey, type KeyAsValueObject } from '../../core/helpers';
+import { assertIsValidKey, type KeyAsValueObject } from '../../core/StrictEnum';
 
 import {
     lengthConversionFactors,

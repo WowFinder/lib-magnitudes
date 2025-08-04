@@ -1,4 +1,5 @@
-import { type StrictEnum, defaultPrecision } from './helpers';
+import { type StrictEnum } from './StrictEnum';
+import { defaultPrecision } from './globals';
 import { bestPrefixByValue, type PrefixSpec } from './Prefix';
 import { type Scalar, type ScalarBuilder } from './Scalar';
 

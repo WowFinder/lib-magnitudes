@@ -5,7 +5,7 @@ import {
     productDimensionality,
     Scalar,
 } from '../../core';
-import { type KeyAsValueObject } from '../../core/helpers';
+import { type KeyAsValueObject } from '../../core/StrictEnum';
 import { Length, lengthConversionFactors, LengthUnit } from '../Base/Length';
 
 type VolumeUnitKey = `${keyof typeof LengthUnit}³`;

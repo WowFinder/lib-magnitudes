@@ -4,7 +4,9 @@ import {
     bestPrefixByValue,
     prefixMatchers,
 } from './Prefix';
-import { defaultPrecision, type StrictEnum, type Parser } from './helpers';
+import { defaultPrecision } from './globals';
+import { type StrictEnum } from './StrictEnum';
+import { type Parser } from './Parser';
 
 const prefixedScalarMatcher = new RegExp(
     `^([+-]?\\d+(?:\\.\\d*)?(?:[eE][+-]?\\d+)?)\\s*${prefixMatchers.capturingOptional}(\\p{L}*)$`,

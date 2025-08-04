@@ -1,7 +1,7 @@
 import prettier from 'eslint-plugin-prettier';
 import typescriptEslint from '@typescript-eslint/eslint-plugin';
 import misc from 'eslint-plugin-misc';
-import stylisticJs from '@stylistic/eslint-plugin-js';
+import stylistic from '@stylistic/eslint-plugin';
 import globals from 'globals';
 import tsParser from '@typescript-eslint/parser';
 import path from 'node:path';
@@ -39,7 +39,7 @@ export default [
         plugins: {
             prettier,
             '@typescript-eslint': typescriptEslint,
-            '@stylistic/js': stylisticJs,
+            '@stylistic/js': stylistic,
             misc,
         },
 
