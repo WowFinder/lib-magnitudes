@@ -9,7 +9,7 @@ import {
     Vector3D,
     type Vector3DBuilder,
 } from '../../core';
-import { type KeyAsValueObject } from '../../core/helpers';
+import { type KeyAsValueObject } from '../../core/StrictEnum';
 import {
     Length,
     lengthConversionFactors,
