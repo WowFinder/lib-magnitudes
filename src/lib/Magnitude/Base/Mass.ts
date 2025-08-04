@@ -19,7 +19,7 @@ const MassUnit = {
     // US customary units
     lb: 'lb',
     oz: 'oz',
-    // tonne variants omitted due to inconsistency accross definitions (metric, US, UK)
+    // tonne variants omitted due to inconsistency across definitions (metric, US, UK)
 } as const;
 Object.freeze(MassUnit);
 

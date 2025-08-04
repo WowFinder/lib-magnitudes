@@ -39,7 +39,7 @@ class SubstanceAmount extends Scalar<typeof SubstanceAmountUnit> {
             ({ value, unit }) =>
                 new SubstanceAmount({
                     value,
-                    unit: unit,
+                    unit,
                 }),
         );
     }

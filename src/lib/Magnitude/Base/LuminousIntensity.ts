@@ -37,7 +37,7 @@ class LuminousIntensity extends Scalar<typeof LuminousIntensityUnit> {
             ({ value, unit }) =>
                 new LuminousIntensity({
                     value,
-                    unit: unit,
+                    unit,
                 }),
         );
     }
