@@ -47,7 +47,7 @@ class BaseVector3D<T extends StrictEnum<T>> implements Coords3D {
     }
 
     get value(): number {
-        return Math.sqrt(this.#x ** 2 + this.#y ** 2 + this.#z ** 2);
+        return Math.hypot(this.#x, this.#y, this.#z);
     }
 
     toRawString(): string {
