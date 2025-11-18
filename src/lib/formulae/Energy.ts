@@ -4,14 +4,23 @@ import {
     EnergyUnit,
     Force,
     ForceUnit,
-    Length,
+    type Length,
     LengthUnit,
     Position,
     PowerUnit,
-    ScalarForce,
+    type ScalarForce,
     TimeUnit,
     type Time,
     type Power,
+    VoltageUnit,
+    CapacitanceUnit,
+    type Capacitance,
+    type Voltage,
+    type Mass,
+    MassUnit,
+    type Velocity,
+    SpeedUnit,
+    type Speed,
 } from '../Magnitude';
 
 function powerTimesTime(power: Power, time: Time): Energy {
@@ -60,16 +69,8 @@ function forceTimesDistance(
             distanceInMeters,
         );
     }
-    const forceValue =
-        forceInNewtons instanceof ScalarForce
-            ? forceInNewtons.value
-            : forceInNewtons.magnitude.value;
-    const distanceValue =
-        distanceInMeters instanceof Length
-            ? distanceInMeters.value
-            : distanceInMeters.magnitude.value;
     return new Energy({
-        value: forceValue * distanceValue,
+        value: forceInNewtons.value * distanceInMeters.value,
         unit: EnergyUnit.J,
     });
 }
@@ -81,9 +82,29 @@ function distanceTimesForce(
     return forceTimesDistance(force, distance);
 }
 
+function kineticEnergy(mass: Mass, velocity: Velocity | Speed): Energy {
+    const massInKg = mass.convert(MassUnit.g).value / 1000;
+    const velocityInMps = velocity.convert(SpeedUnit['m/s']).value;
+    return new Energy({
+        value: 0.5 * massInKg * velocityInMps * velocityInMps,
+        unit: EnergyUnit.J,
+    });
+}
+
+function capacitorEnergy(capacitance: Capacitance, voltage: Voltage): Energy {
+    const capacitanceInFarads = capacitance.convert(CapacitanceUnit.F).value;
+    const voltageInVolts = voltage.convert(VoltageUnit.V).value;
+    return new Energy({
+        value: 0.5 * capacitanceInFarads * voltageInVolts * voltageInVolts,
+        unit: EnergyUnit.J,
+    });
+}
+
 export {
     powerTimesTime,
     timeTimesPower,
     forceTimesDistance,
     distanceTimesForce,
+    kineticEnergy,
+    capacitorEnergy,
 };

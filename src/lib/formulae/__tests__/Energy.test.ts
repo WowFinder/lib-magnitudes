@@ -1,21 +1,31 @@
 import {
+    Capacitance,
+    CapacitanceUnit,
     EnergyUnit,
     Force,
     ForceUnit,
     Length,
     LengthUnit,
+    Mass,
+    MassUnit,
     Position,
     Power,
     PowerUnit,
     ScalarForce,
+    Speed,
+    SpeedUnit,
     Time,
     TimeUnit,
+    Voltage,
+    VoltageUnit,
 } from '../../Magnitude';
 import {
     powerTimesTime,
     timeTimesPower,
     forceTimesDistance,
     distanceTimesForce,
+    kineticEnergy,
+    capacitorEnergy,
 } from '../Energy';
 import { describe, expect, it } from 'vitest';
 
@@ -171,6 +181,28 @@ describe('Energy formulae', () => {
                 expect(energy2.value).toBe(18);
                 expect(energy2.unit).toBe(EnergyUnit.J);
             });
+        });
+    });
+    describe('kineticEnergy', () => {
+        it('should calculate kinetic energy correctly for values in SI units', () => {
+            const mass = new Mass({ value: 1000, unit: MassUnit.g });
+            const speed = new Speed({ value: 10, unit: SpeedUnit['m/s'] });
+            const energy = kineticEnergy(mass, speed);
+            expect(energy).toBeDefined();
+            expect(energy.value).toBe(50);
+        });
+    });
+    describe('capacitorEnergy', () => {
+        it('should calculate capacitor energy correctly for values in SI units', () => {
+            const capacitance = new Capacitance({
+                value: 0.01,
+                unit: CapacitanceUnit.F,
+            });
+            const voltage = new Voltage({ value: 5, unit: VoltageUnit.V });
+            const energy = capacitorEnergy(capacitance, voltage);
+            expect(energy).toBeDefined();
+            expect(energy.value).toBe(0.125);
+            expect(energy.unit).toBe(EnergyUnit.J);
         });
     });
 });

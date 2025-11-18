@@ -96,17 +96,5 @@ describe('Speed and Velocity classes', () => {
             expect(velocityInFeetPerSecond.x).toBeCloseTo(3.28084, 3);
             expect(velocityInFeetPerSecond.unit).toBe(SpeedUnit['ft/s']);
         });
-
-        it('should compute the magnitude of the vector correctly', () => {
-            const velocity = new Velocity({
-                x: 3,
-                y: 4,
-                z: 0,
-                unit: SpeedUnit['m/s'],
-            });
-            const speed = velocity.magnitude;
-            expect(speed.value).toBeCloseTo(5, 5);
-            expect(speed.unit).toBe(SpeedUnit['m/s']);
-        });
     });
 });

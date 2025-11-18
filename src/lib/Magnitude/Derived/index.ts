@@ -1,20 +1,20 @@
 export * from './Acceleration';
+export * from './Capacitance';
 export * from './ElectricCharge';
+export * from './ElectricResistance';
 export * from './Energy';
 export * from './Force';
+export * from './Frequency';
+export * from './PlaneAngle';
 export * from './Power';
 export * from './Surface';
 export * from './Velocity';
 export * from './Voltage';
 export * from './Volume';
 /* TODO: missing SI derived units:
-  - PlaneAngle (radian)
   - SolidAngle (steradian)
-  - Frequency (hertz)
   - Pressure (pascal)
-  - Capacitance (farad)
-  - ElectricalResistance (ohm)
-  - ElectricalConductance (siemens)
+  - ElectricConductance (siemens)
   - MagneticFlux (weber)
   - MagneticFluxDensity (tesla)
   - Inductance (henry)

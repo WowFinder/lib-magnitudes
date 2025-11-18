@@ -46,6 +46,10 @@ class BaseVector3D<T extends StrictEnum<T>> implements Coords3D {
         return this.#unit;
     }
 
+    get value(): number {
+        return Math.hypot(this.#x, this.#y, this.#z);
+    }
+
     toRawString(): string {
         return `(${this.#x}, ${this.#y}, ${this.#z}) ${String(this.#unit)}`;
     }
@@ -70,13 +74,6 @@ class BaseVector3D<T extends StrictEnum<T>> implements Coords3D {
 
     toString(): string {
         return this.toPrefixedString(defaultPrecision);
-    }
-
-    protected get magnitudeBuilder(): ScalarBuilder<T> {
-        return {
-            value: Math.sqrt(this.#x ** 2 + this.#y ** 2 + this.#z ** 2),
-            unit: this.#unit,
-        };
     }
 }
 

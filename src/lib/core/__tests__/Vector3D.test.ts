@@ -50,12 +50,9 @@ describe('Vector3D', () => {
         expect(vector.toString()).toBe('(100 mm, 20.0 mm, 3.00 mm)');
     });
 
-    it('should calculate magnitude correctly', () => {
+    it('should calculate value (magnitude) correctly', () => {
         const vector = sampleCtor({ x: 3, y: 4, z: 0, unit: 'm' });
-        const magnitude = vector.magnitude;
-        expect(magnitude).toBeDefined();
-        expect(magnitude.value).toBeCloseTo(5);
-        expect(magnitude.unit).toBe(LengthUnit.m);
+        expect(vector.value).toBeCloseTo(5);
     });
 
     describe('add', () => {

@@ -69,10 +69,6 @@ class Force extends Vector3D<typeof ForceUnit> {
         super({ x, y, z, unit });
     }
 
-    get magnitude(): ScalarForce {
-        return new ScalarForce(this.magnitudeBuilder);
-    }
-
     static get dimensions(): Dimensionality {
         return ScalarForce.dimensions;
     }
