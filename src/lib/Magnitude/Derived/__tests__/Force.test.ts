@@ -73,12 +73,5 @@ describe('Scalar and vectorial Force classes', () => {
             expect(forceInNewtonsAgain.z).toBeCloseTo(3, 6);
             expect(forceInNewtonsAgain.unit).toBe(ForceUnit.N);
         });
-
-        it('should calculate the magnitude correctly', () => {
-            const force = new Force({ x: 3, y: 4, z: 0, unit: ForceUnit.N });
-            const magnitude = force.magnitude;
-            expect(magnitude.value).toBe(5);
-            expect(magnitude.unit).toBe(ForceUnit.N);
-        });
     });
 });

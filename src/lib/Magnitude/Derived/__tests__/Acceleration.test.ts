@@ -130,16 +130,5 @@ describe('Acceleration classes', () => {
                 AccelerationUnit['ft/s²'],
             );
         });
-        it('should compute the magnitude of the vector correctly', () => {
-            const acceleration = new Acceleration({
-                x: 3,
-                y: 4,
-                z: 0,
-                unit: AccelerationUnit['m/s²'],
-            });
-            const magnitude = acceleration.magnitude;
-            expect(magnitude.value).toBeCloseTo(5, 5);
-            expect(magnitude.unit).toBe(AccelerationUnit['m/s²']);
-        });
     });
 });

@@ -100,10 +100,6 @@ class Velocity extends Vector3D<typeof SpeedUnit> {
         super({ x, y, z, unit });
     }
 
-    get magnitude(): Speed {
-        return new Speed(this.magnitudeBuilder);
-    }
-
     static get dimensions(): Dimensionality {
         return Speed.dimensions;
     }

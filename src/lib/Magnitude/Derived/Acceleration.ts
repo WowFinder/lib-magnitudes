@@ -129,10 +129,6 @@ class Acceleration extends Vector3D<typeof AccelerationUnit> {
         super({ x, y, z, unit });
     }
 
-    get magnitude(): ScalarAcceleration {
-        return new ScalarAcceleration(this.magnitudeBuilder);
-    }
-
     static get dimensions(): Dimensionality {
         return ScalarAcceleration.dimensions;
     }

@@ -24,10 +24,6 @@ class Position extends Vector3D<typeof LengthUnit> {
         super({ x, y, z, unit });
     }
 
-    get magnitude(): Length {
-        return new Length(this.magnitudeBuilder);
-    }
-
     static get dimensions(): Dimensionality {
         return Length.dimensions;
     }

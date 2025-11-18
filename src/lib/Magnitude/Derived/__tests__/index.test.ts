@@ -11,10 +11,18 @@ describe('Derived Magnitudes', () => {
             'AccelerationUnit',
             'accelerationUnitConversionFactors',
             'assertIsAccelerationUnitKey',
+            // From Capacitance.ts
+            'Capacitance',
+            'CapacitanceUnit',
+            'capacitanceConversionFactors',
             // From ElectricCharge.ts
             'ElectricCharge',
             'ElectricChargeUnit',
             'electricChargeConversionFactors',
+            // From ElectricResistance.ts
+            'ElectricResistance',
+            'ElectricResistanceUnit',
+            'electricResistanceConversionFactors',
             // From Energy.ts
             'Energy',
             'EnergyUnit',
@@ -24,6 +32,14 @@ describe('Derived Magnitudes', () => {
             'Force',
             'ForceUnit',
             'forceConversionFactors',
+            // From Frequency.ts
+            'Frequency',
+            'FrequencyUnit',
+            'frequencyConversionFactors',
+            // From PlaneAngle.ts
+            'PlaneAngle',
+            'PlaneAngleUnit',
+            'planeAngleConversionFactors',
             // From Power.ts
             'Power',
             'PowerUnit',

@@ -11,6 +11,6 @@ function assertIsValidKey<T extends string>(
     }
 }
 
-type StrictEnum<T> = KeyAsValueObject<keyof T>;
+type StrictEnum<T> = KeyAsValueObject<keyof T & string>;
 
 export { type KeyAsValueObject, type StrictEnum, assertIsValidKey };

@@ -1,10 +1,8 @@
-import { type KeyAsValueObject } from './StrictEnum';
+import { type StrictEnum } from './StrictEnum';
 
 type Parser<T> = (unit: string) => T;
 
-function unitParser<T extends KeyAsValueObject<keyof T & string>>(
-    unitEnum: T,
-): Parser<keyof T> {
+function unitParser<T extends StrictEnum<T>>(unitEnum: T): Parser<keyof T> {
     return (unit: string): keyof T => {
         const key = unit as keyof T;
         if (key in unitEnum) {
